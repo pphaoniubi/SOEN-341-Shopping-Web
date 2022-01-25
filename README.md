@@ -23,7 +23,7 @@ We develop this shopping website to simulate some basic functions of Amazon.
 ## Members & Responsibility:
  * Yen-Ju Lee (27747675) andylee511 -- frontend
  * Amantuer Dinala (40027410) Dinka211 -- frontend
- * Shuang Luo (40001454) ShuangLuoZZZ -- ?
+ * Shuang Luo (40001454) ShuangLuoZZZ -- frontend
  * Pai Peng (40155601) pphaoniubi -- backend
  * Mengqi Liu (40221432) paullmq8  -- backend
 
