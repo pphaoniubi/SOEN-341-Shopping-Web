@@ -21,10 +21,10 @@ We develop this shopping website to simulate some basic functions of Amazon.
  * System admin could manage promotion items.
 
 ## Members & Responsibility:
- * Yen-Ju Lee (27747675) andylee511 -- ?
- * Pai Peng (40155601) pphaoniubi -- ?
+ * Yen-Ju Lee (27747675) andylee511 -- frontend
+ * Amantuer Dinala (40027410) Dinka211 -- frontend
  * Shuang Luo (40001454) ShuangLuoZZZ -- ?
- * Amantuer Dinala (40027410) Dinka211 -- ?
+ * Pai Peng (40155601) pphaoniubi -- backend
  * Mengqi Liu (40221432) paullmq8  -- backend
 
 ## Languages:
