@@ -6,7 +6,7 @@ Develop a simplified version of Amazon(online shopping website).
 
 ## Project Description:
 
-We develop this shopping website to simulate some basic functions of Amazon.
+We develop this shopping website to simulate some basic functions of Amazon. For example, users could browse the online selling items. After signing up and logging in, they could add items to shopping cart and pay them online. There's also system admin who is able to manage users and items in the system.  
 
 ## Core Features:
 
@@ -34,7 +34,7 @@ We develop this shopping website to simulate some basic functions of Amazon.
  * CSS3
  * JavaScript
 
-## Frameworks:
+## Techniques:
 ### Backend:
  * Spring Boot
  * Spring Data JPA
@@ -44,4 +44,4 @@ We develop this shopping website to simulate some basic functions of Amazon.
  * JUnit5
 
 ### Frontend:
- * ?
+ * TBD
