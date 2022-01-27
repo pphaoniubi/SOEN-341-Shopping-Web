@@ -50,3 +50,5 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * Spring Data REST
  * JQuery
  * vue.js
+ * Angular
+ * D3.js 
