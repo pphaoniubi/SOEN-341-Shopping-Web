@@ -46,5 +46,6 @@ We develop this shopping website to simulate some basic functions of Amazon. For
 
 ### Frontend:
  * JQuery
+ * Bootstrap
 
 
