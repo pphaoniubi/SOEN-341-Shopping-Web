@@ -6,7 +6,7 @@ Develop a simplified version of Amazon(online shopping website).
 
 ## Project Description:
 
-We develop this shopping website to simulate some basic functions of Amazon. For example, users could browse the online selling items. After signing up and logging in, they could add items to shopping cart and pay them online. There's also system admin who is able to manage users and items in the system.  
+The project objective is to develop a shopping website to simulate some basic functions of Amazon. For example, users could browse the online selling items. After signing up and logging in, they could add items to shopping cart and pay them online. There's also system admin who is able to manage users and items in the system.  
 
 ## Core Features:
 
@@ -15,7 +15,7 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * Users could add, remove and modify items in their shopping cart.
  * Users could check out, pay online and view orders.
  * Users could write reviews and view others'.
- * Users could cancel unwanted order.
+ * Users could cancel the unwanted order.
  * System admin could import items, modify their attributes(brand, name, description, thumbnail, price, quantities, ...) and make them online or offline.
  * System admin could view all users or disable some users.
  * System admin could view all orders.
@@ -45,7 +45,7 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * JUnit5
 
 ### Frontend:
- * JQuery
+ * JQuery 
  * Bootstrap
 
 
