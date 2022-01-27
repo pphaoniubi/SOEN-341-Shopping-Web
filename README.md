@@ -45,7 +45,7 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * JUnit5
 
 ### Frontend:
- * React.js
+ * JQuery
  * Spring Boot
  * Spring Data REST
  * D3.js 
