@@ -48,4 +48,4 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * JQuery
  * Spring Boot
  * Spring Data REST
- * D3.js 
+ * HTTP
