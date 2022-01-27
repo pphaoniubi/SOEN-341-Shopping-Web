@@ -49,4 +49,4 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * Spring Boot
  * Spring Data REST
  * JQuery
- * 
+ * vue.js
