@@ -15,6 +15,7 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * Users could add, remove and modify items in their shopping cart.
  * Users could check out, pay online and view orders.
  * Users could write reviews and view others'.
+ * Users could cancel unwanted order.
  * System admin could import items, modify their attributes(brand, name, description, thumbnail, price, quantities, ...) and make them online or offline.
  * System admin could view all users or disable some users.
  * System admin could view all orders.
@@ -47,3 +48,5 @@ We develop this shopping website to simulate some basic functions of Amazon. For
  * React.js
  * Spring Boot
  * Spring Data REST
+ * JQuery
+ * 
