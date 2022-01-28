@@ -1,4 +1,6 @@
 .idea/
 .DS_Store
-.gradle/
+backend/.DS_Store
 build/
+out/
+.gradle/
