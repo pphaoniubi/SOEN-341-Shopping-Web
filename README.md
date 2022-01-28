@@ -47,5 +47,6 @@ The project objective is to develop a shopping website to simulate some basic fu
 ### Frontend:
  * JQuery 
  * Bootstrap
-
+ * AJAX
+ * json
 
