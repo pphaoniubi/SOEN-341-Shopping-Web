@@ -27,12 +27,13 @@ public class CustomerItemService {
         return customerItemRepository.findOneByIdAndForSaleTrue(id);
     }
 
-    public List<Item> findAllByBrand(String brand){
-        return customerItemRepository.findAllByBrand(brand);
+    public Page<Item> findAllByBrand(String brand, Pageable pageable){
+
+        return customerItemRepository.findAllByBrand(brand, pageable);
     }
 
-    public List<Item> findAllByName(String name){
-        return customerItemRepository.findAllByName(name);
+    public Page<Item> findAllByName(String name, Pageable pageable){
+        return customerItemRepository.findAllByName(name, pageable);
     }
 
     public Item save(Item item) {
