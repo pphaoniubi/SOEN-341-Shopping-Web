@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface CustomerItemRepository extends JpaRepository<Item, Integer> {
 
-    Page<Item> findAll(Pageable pageable);
+    Page<Item> findAllByForSaleTrue(Pageable pageable);
+    Item findOneByIdAndForSaleTrue(int id);
     List<Item> findAllByName(String name);
     List<Item> findAllByBrand(String brand);
 

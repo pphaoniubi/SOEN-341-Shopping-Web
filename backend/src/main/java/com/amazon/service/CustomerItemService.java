@@ -19,12 +19,12 @@ public class CustomerItemService {
         this.customerItemRepository = customerItemRepository;
     }
 
-    public Page<Item> findAllItems(Pageable pageable) {
-        return customerItemRepository.findAll(pageable);
+    public Page<Item> findAllForSaleItems(Pageable pageable) {
+         return customerItemRepository.findAllByForSaleTrue(pageable);
     }
 
-    public Optional<Item> findOneById(int id) {
-        return customerItemRepository.findById(id);
+    public Item findOneForSaleItemById(int id) {
+        return customerItemRepository.findOneByIdAndForSaleTrue(id);
     }
 
     public List<Item> findAllByBrand(String brand){

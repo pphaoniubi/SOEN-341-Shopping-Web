@@ -12,7 +12,7 @@ import java.util.Objects;
 import static com.amazon.constant.CsvHeader.BRAND;
 import static com.amazon.constant.CsvHeader.DESCRIPTION;
 import static com.amazon.constant.CsvHeader.ID;
-import static com.amazon.constant.CsvHeader.IN_STOCK_STATUS;
+import static com.amazon.constant.CsvHeader.FOR_SALE;
 import static com.amazon.constant.CsvHeader.NAME;
 import static com.amazon.constant.CsvHeader.PRICE;
 import static com.amazon.constant.CsvHeader.QUANTITY;
@@ -32,7 +32,7 @@ public class AdminCsvService {
             || Objects.isNull(headerMap.get(BRAND.toString()))
             || Objects.isNull(headerMap.get(DESCRIPTION.toString()))
             || Objects.isNull(headerMap.get(RATE.toString()))
-            || Objects.isNull(headerMap.get(IN_STOCK_STATUS.toString()))
+            || Objects.isNull(headerMap.get(FOR_SALE.toString()))
             || Objects.isNull(headerMap.get(THUMBNAIL.toString()))
             || Objects.isNull(headerMap.get(QUANTITY.toString()))) {
             return false;

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -32,18 +33,17 @@ public class CustomerItemController {
     }
 
     @GetMapping
-    public Page<ItemListDto> findAllItems(Pageable pageable) {
-        Page<Item> itemPage = customerItemService.findAllItems(pageable);
+    public Page<ItemListDto> findAllForSaleItems(Pageable pageable) {
+        Page<Item> itemPage = customerItemService.findAllForSaleItems(pageable);
         List<ItemListDto> itemListDtos = ItemListMapper.INSTANCE.map(itemPage.getContent());
         return new PageImpl<>(itemListDtos, pageable, itemPage.getTotalElements());
     }
 
     @GetMapping("/{id}")
-    public ItemDetailDto findItemById(@PathVariable("id") int id,
-                                      HttpServletResponse response) throws IOException {
-        Optional<Item> itemOptional = customerItemService.findOneById(id);
-        if (itemOptional.isPresent()) {
-            Item item = itemOptional.get();
+    public ItemDetailDto findForSaleItemById(@PathVariable("id") int id,
+                                             HttpServletResponse response) throws IOException {
+        Item item = customerItemService.findOneForSaleItemById(id);
+        if (Objects.nonNull(item)) {
             return ItemDetailMapper.INSTANCE.map(item);
         }
         response.sendError(HttpStatus.NOT_FOUND.value(), "There's no such item.");

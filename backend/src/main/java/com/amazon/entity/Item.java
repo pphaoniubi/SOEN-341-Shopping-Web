@@ -25,8 +25,8 @@ public class Item {
     @Column(name = "rate")
     private double rate;
 
-    @Column(name = "in_stock_status")
-    private boolean inStockStatus;
+    @Column(name = "for_sale")
+    private boolean forSale;
 
     @Column(name = "thumbnail")
     private String thumbnail;
@@ -38,14 +38,14 @@ public class Item {
 
     }
 
-    public Item(int id, String name, double price, String brand, String description, double rate, boolean inStockStatus, String thumbnail, int quantity) {
+    public Item(int id, String name, double price, String brand, String description, double rate, boolean forSale, String thumbnail, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.brand = brand;
         this.description = description;
         this.rate = rate;
-        this.inStockStatus = inStockStatus;
+        this.forSale = forSale;
         this.thumbnail = thumbnail;
         this.quantity = quantity;
     }
@@ -98,12 +98,12 @@ public class Item {
         this.rate = rate;
     }
 
-    public boolean isInStockStatus() {
-        return inStockStatus;
+    public boolean isForSale() {
+        return forSale;
     }
 
-    public void setInStockStatus(boolean inStockStatus) {
-        this.inStockStatus = inStockStatus;
+    public void setForSale(boolean forSale) {
+        this.forSale = forSale;
     }
 
     public String getThumbnail() {
