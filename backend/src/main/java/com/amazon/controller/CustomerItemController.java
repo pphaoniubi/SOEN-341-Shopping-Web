@@ -10,11 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,8 +24,8 @@ public class CustomerItemController {
 
     private final CustomerItemService customerItemService;
 
-    public CustomerItemController(CustomerItemService itemService) {
-        this.customerItemService = itemService;
+    public CustomerItemController(CustomerItemService customerItemService) {
+        this.customerItemService = customerItemService;
     }
 
     @GetMapping
@@ -49,14 +45,14 @@ public class CustomerItemController {
         response.sendError(HttpStatus.NOT_FOUND.value(), "There's no such item.");
         return null;
     }
-
-    public List<Item> findAllByname(String name){
-        return customerItemService.findAllByName(name);
+    @GetMapping("/byName")
+    public Page<Item> findAllByname(@RequestParam("name") String name, Pageable pageable){
+        return customerItemService.findAllByName(name, pageable);
     }
-    public List<Item> findAllByBrand(String brand){
-        return customerItemService.findAllByBrand(brand);
+    @GetMapping("/byBrand")
+    public Page<Item> findAllByBrand(@RequestParam("brand") String brand, Pageable pageable){
+        return customerItemService.findAllByBrand(brand, pageable);
     }
-
     @PostMapping
     public Item saveItem() {
         return new Item();
