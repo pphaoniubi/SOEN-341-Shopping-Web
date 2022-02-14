@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/customer/item")
 public class CustomerItemController {
@@ -22,6 +24,13 @@ public class CustomerItemController {
     @GetMapping
     public Page<Item> findAllItems(Pageable pageable) {
         return null;
+    }
+
+    public List<Item> findAllByname(String name){
+        return customerItemService.findAllByName(name);
+    }
+    public List<Item> findAllByBrand(String brand){
+        return customerItemService.findAllByBrand(brand);
     }
         //Page<ItemDto> 再放pageable
         //返回给前端

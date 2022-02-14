@@ -16,11 +16,11 @@ public class CustomerItemService {
     public CustomerItemService(CustomerItemRepository customerItemRepository) {
         this.customerItemRepository = customerItemRepository;
     }
-    public Page<Item> findItemByBrand(String brand){
+    public List<Item> findAllByBrand(String brand){
         return customerItemRepository.findAllByBrand(brand);
     }
 
-    public Page<Item> findItemByName(String name){
+    public List<Item> findAllByName(String name){
         return customerItemRepository.findAllByName(name);
     }
     public List<Item> findAllItems() {
