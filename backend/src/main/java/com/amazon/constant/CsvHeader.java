@@ -8,7 +8,7 @@ public enum CsvHeader {
     BRAND,
     DESCRIPTION,
     RATE,
-    IN_STOCK_STATUS,
+    FOR_SALE,
     THUMBNAIL,
     QUANTITY
 

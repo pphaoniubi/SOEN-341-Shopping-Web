@@ -1,14 +1,15 @@
 package com.amazon.dto;
 
-public class ItemDto {
+public class ItemDetailDto {
 
     private int id;
+    private String name;
     private double price;
     private String brand;
     private String description;
     private double rate;
-    private String review;
-    private boolean inStockStatus;
+    private String thumbnail;
+    private int quantity;
 
     public int getId() {
         return id;
@@ -16,6 +17,14 @@ public class ItemDto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
@@ -50,19 +59,19 @@ public class ItemDto {
         this.rate = rate;
     }
 
-    public String getReview() {
-        return review;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
-    public boolean isInStockStatus() {
-        return inStockStatus;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setInStockStatus(boolean inStockStatus) {
-        this.inStockStatus = inStockStatus;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

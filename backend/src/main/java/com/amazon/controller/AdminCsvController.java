@@ -32,7 +32,7 @@ import java.util.Objects;
 import static com.amazon.constant.CsvHeader.BRAND;
 import static com.amazon.constant.CsvHeader.DESCRIPTION;
 import static com.amazon.constant.CsvHeader.ID;
-import static com.amazon.constant.CsvHeader.IN_STOCK_STATUS;
+import static com.amazon.constant.CsvHeader.FOR_SALE;
 import static com.amazon.constant.CsvHeader.NAME;
 import static com.amazon.constant.CsvHeader.PRICE;
 import static com.amazon.constant.CsvHeader.QUANTITY;
@@ -84,7 +84,7 @@ public class AdminCsvController {
                             Double.parseDouble(record.get(PRICE)),
                             record.get(BRAND), record.get(DESCRIPTION),
                             Double.parseDouble(record.get(RATE)),
-                            Boolean.parseBoolean(record.get(IN_STOCK_STATUS)),
+                            Boolean.parseBoolean(record.get(FOR_SALE)),
                             record.get(THUMBNAIL),
                             Integer.parseInt(record.get(QUANTITY))));
                 }
