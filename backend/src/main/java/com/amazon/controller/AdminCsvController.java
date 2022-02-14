@@ -2,7 +2,7 @@ package com.amazon.controller;
 
 import com.amazon.entity.Item;
 import com.amazon.service.AdminCsvService;
-import com.amazon.service.ItemService;
+import com.amazon.service.CustomerItemService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -46,10 +46,10 @@ public class AdminCsvController {
     private static final String TEMPLATE_FILE = "template.csv";
 
     private final AdminCsvService adminCsvService;
-    private final ItemService itemService;
+    private final CustomerItemService itemService;
 
     public AdminCsvController(AdminCsvService adminCsvService,
-                              ItemService itemService) {
+                              CustomerItemService itemService) {
         this.adminCsvService = adminCsvService;
         this.itemService = itemService;
     }
