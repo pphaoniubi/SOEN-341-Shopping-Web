@@ -19,7 +19,7 @@ CREATE TABLE item
     brand           VARCHAR(70),
     description     VARCHAR(5000),
     rate            DOUBLE PRECISION,
-    in_stock_status BOOLEAN          NOT NULL,
+    for_sale        BOOLEAN NOT NULL,
     thumbnail       VARCHAR(5000),
     quantity        INTEGER
 );
