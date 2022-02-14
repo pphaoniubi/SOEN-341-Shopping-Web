@@ -23,6 +23,10 @@ public class CustomerItemService {
         return customerItemRepository.findAll(pageable);
     }
 
+    public Optional<Item> findOneById(int id) {
+        return customerItemRepository.findById(id);
+    }
+
     public List<Item> findAllByBrand(String brand){
         return customerItemRepository.findAllByBrand(brand);
     }

@@ -1,6 +1,6 @@
 package com.amazon.mapper;
 
-import com.amazon.dto.ItemListDto;
+import com.amazon.dto.ItemDetailDto;
 import com.amazon.entity.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -8,11 +8,11 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface ItemMapper {
+public interface ItemDetailMapper {
 
-    ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
+    ItemDetailMapper INSTANCE = Mappers.getMapper(ItemDetailMapper.class);
 
-    ItemListDto map(Item source);
+    ItemDetailDto map(Item source);
 
-    List<ItemListDto> map(List<Item> source);
+    List<ItemDetailDto> map(List<Item> source);
 }
