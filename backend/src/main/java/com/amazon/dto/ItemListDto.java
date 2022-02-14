@@ -6,6 +6,7 @@ public class ItemListDto {
     private String name;
     private double price;
     private String brand;
+    private String thumbnail;
 
     public int getId() {
         return id;
@@ -37,5 +38,13 @@ public class ItemListDto {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }
