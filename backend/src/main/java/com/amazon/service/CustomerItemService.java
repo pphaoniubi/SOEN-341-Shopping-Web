@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerItemService {
@@ -28,13 +27,14 @@ public class CustomerItemService {
     }
 
     public Page<Item> findAllByBrand(String brand, Pageable pageable){
-
         return customerItemRepository.findAllByBrand(brand, pageable);
     }
 
-    public Page<Item> findAllByName(String name, Pageable pageable){
-        return customerItemRepository.findAllByName(name, pageable);
+    public Page<Item> findAllForSaleItemsBySimilarName(String name, Pageable pageable){
+        return customerItemRepository.findAllByNameContainingIgnoreCaseAndForSaleTrue(name, pageable);
     }
+
+
 
     public Item save(Item item) {
         return customerItemRepository.save(item);

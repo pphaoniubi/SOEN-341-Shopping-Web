@@ -35,8 +35,8 @@ public class CustomerItemController {
     }
 
     @GetMapping("/{id}")
-    public ItemDetailDto findForSaleItemById(@PathVariable("id") int id,
-                                             HttpServletResponse response) throws IOException {
+    public ItemDetailDto findOneForSaleItemById(@PathVariable("id") int id,
+                                                HttpServletResponse response) throws IOException {
         Item item = customerItemService.findOneForSaleItemById(id);
         if (Objects.nonNull(item)) {
             return ItemDetailMapper.INSTANCE.map(item);
@@ -44,18 +44,19 @@ public class CustomerItemController {
         response.sendError(HttpStatus.NOT_FOUND.value(), "There's no such item.");
         return null;
     }
+
     @GetMapping("/byName")
-    public Page<Item> findAllByname(@RequestParam("name") String name, Pageable pageable){
-        return customerItemService.findAllByName(name, pageable);
+    public Page<Item> findAllForSaleItemsBySimilarName(@RequestParam("name") String name, Pageable pageable){
+        return customerItemService.findAllForSaleItemsBySimilarName(name, pageable);
     }
+
     @GetMapping("/byBrand")
     public Page<Item> findAllByBrand(@RequestParam("brand") String brand, Pageable pageable){
         return customerItemService.findAllByBrand(brand, pageable);
     }
+
     @PostMapping
     public Item saveItem() {
         return new Item();
     }
-
-
 }
