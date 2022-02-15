@@ -26,15 +26,13 @@ public class CustomerItemService {
         return customerItemRepository.findOneByIdAndForSaleTrue(id);
     }
 
-    public Page<Item> findAllByBrand(String brand, Pageable pageable){
-        return customerItemRepository.findAllByBrand(brand, pageable);
+    public Page<Item> findAllForSaleItemsByBrand(String brand, Pageable pageable){
+        return customerItemRepository.findAllByBrandIgnoreCaseAndForSaleTrue(brand, pageable);
     }
 
     public Page<Item> findAllForSaleItemsBySimilarName(String name, Pageable pageable){
         return customerItemRepository.findAllByNameContainingIgnoreCaseAndForSaleTrue(name, pageable);
     }
-
-
 
     public Item save(Item item) {
         return customerItemRepository.save(item);
