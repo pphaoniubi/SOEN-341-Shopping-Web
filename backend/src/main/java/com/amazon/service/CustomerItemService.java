@@ -34,6 +34,10 @@ public class CustomerItemService {
         return customerItemRepository.findAllByNameContainingIgnoreCaseAndForSaleTrue(name, pageable);
     }
 
+    public List<String> findAllForSaleBrands() {
+        return customerItemRepository.findAllForSaleBrands();
+    }
+
     public Item save(Item item) {
         return customerItemRepository.save(item);
     }
