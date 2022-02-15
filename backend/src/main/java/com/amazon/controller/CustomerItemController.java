@@ -51,8 +51,8 @@ public class CustomerItemController {
     }
 
     @GetMapping("/byBrand")
-    public Page<Item> findAllByBrand(@RequestParam("brand") String brand, Pageable pageable){
-        return customerItemService.findAllByBrand(brand, pageable);
+    public Page<Item> findAllForSaleItemsByBrand(@RequestParam("brand") String brand, Pageable pageable){
+        return customerItemService.findAllForSaleItemsByBrand(brand, pageable);
     }
 
     @PostMapping
