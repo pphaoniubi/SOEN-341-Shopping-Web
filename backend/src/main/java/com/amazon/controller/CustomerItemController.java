@@ -55,6 +55,11 @@ public class CustomerItemController {
         return customerItemService.findAllForSaleItemsByBrand(brand, pageable);
     }
 
+    @GetMapping("/brand")
+    public List<String> findAllForSaleBrands() {
+        return customerItemService.findAllForSaleBrands();
+    }
+
     @PostMapping
     public Item saveItem() {
         return new Item();
