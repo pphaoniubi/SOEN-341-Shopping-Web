@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer/item")
@@ -36,8 +35,8 @@ public class CustomerItemController {
     }
 
     @GetMapping("/{id}")
-    public ItemDetailDto findForSaleItemById(@PathVariable("id") int id,
-                                             HttpServletResponse response) throws IOException {
+    public ItemDetailDto findOneForSaleItemById(@PathVariable("id") int id,
+                                                HttpServletResponse response) throws IOException {
         Item item = customerItemService.findOneForSaleItemById(id);
         if (Objects.nonNull(item)) {
             return ItemDetailMapper.INSTANCE.map(item);
@@ -45,18 +44,24 @@ public class CustomerItemController {
         response.sendError(HttpStatus.NOT_FOUND.value(), "There's no such item.");
         return null;
     }
+
     @GetMapping("/byName")
-    public Page<Item> findAllByname(@RequestParam("name") String name, Pageable pageable){
-        return customerItemService.findAllByName(name, pageable);
+    public Page<Item> findAllForSaleItemsBySimilarName(@RequestParam("name") String name, Pageable pageable){
+        return customerItemService.findAllForSaleItemsBySimilarName(name, pageable);
     }
+
     @GetMapping("/byBrand")
-    public Page<Item> findAllByBrand(@RequestParam("brand") String brand, Pageable pageable){
-        return customerItemService.findAllByBrand(brand, pageable);
+    public Page<Item> findAllForSaleItemsByBrand(@RequestParam("brand") String brand, Pageable pageable){
+        return customerItemService.findAllForSaleItemsByBrand(brand, pageable);
     }
+
+    @GetMapping("/brand")
+    public List<String> findAllForSaleBrands() {
+        return customerItemService.findAllForSaleBrands();
+    }
+
     @PostMapping
     public Item saveItem() {
         return new Item();
     }
-
-
 }
