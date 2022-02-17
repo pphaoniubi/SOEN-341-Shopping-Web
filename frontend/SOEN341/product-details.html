@@ -17,6 +17,45 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+<script>
+  
+</script>
+<script type="text/javascript"  src="./jquery/getUrlParam.js"></script>
+<script type="text/javascript" src="./jquery/jquery-3.6.0.js"></script>
+<script src="./jquery/jquery-3.6.0.js"></script>
+<script>
+  var Id;
+  $(function(){
+           getData1();
+        });
+        function getData1(){
+            Id = UrlParm.parm("id");
+        }
+
+    var url = 'https://d46a-172-98-153-208.ngrok.io/item/' + Id;
+     $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+
+            success: function(jqXHR) {
+              
+                    var parsedJson = jqXHR;
+                    alert(parsedJson.description);
+                    alert(parsedJson.name);
+                    $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
+                    $("#current").html("<h4>" + jqXHR.price + "</h4>");
+                    $("#name").html("<h1>" + jqXHR.name + "</h1>");
+            }
+,
+            error: function(jqXHR){
+                alert(jqXHR.statusText);
+            }
+        }).done(function () {
+            console.log(arguments);
+        });
+</script>
+
   </head>
   <body>
     <div class="container">
@@ -41,13 +80,13 @@
     <div class="small-container single-product">
       <div class="row">
         <!-- we will have 2 columns  -->
-        <div class="col-2">
-          <img src="images/pexels-hassan-ouajbir-887898.jpg" width="90%" />
+        <div class="col-2" id="test">
+          
         </div>
         <div class="col-2">
-          <p>Home / Jacket</p>
-          <h1>Leather Jacket Women</h1>
-          <h4>$69.99</h4>
+          <p id="name">Home / Jacket</p>
+          <h1 id="current"></h1>
+
           <select>
             <option>Select Size</option>
             <option>XXL</option>
@@ -191,5 +230,6 @@
         }
       }
     </script>
+     $("#current").html("<h4>" + jqXHR.price + "</h4>");
   </body>
 </html>
