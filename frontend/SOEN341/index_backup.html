@@ -27,13 +27,41 @@
                 },
                 success: function (data) {
                     var content = data.content;
-                    for (var i = 0; i < content.length; i++) {
-                        $("#test").append("<h1>" + content[i].id + "<h1/>"
-                            + "<img src='" + content[i].thumbnail + "'/>"
-                            + "<h3>" + content[i].price + "<h3/>"
-                            + "<label onclick='jump(" + content[i].id + ")'>add to cart</label>"
-                        );
+
+                    var row;
+                    for (var j = 0; j < content.length; j++) {
+                        if (j % 8 == 0) {
+                            row = $("<div class='col-4'></div>");
+                            $("#products").append(row);
+                        }
+                        row.append("<img src='" + content[j].thumbnail + "' width='200' height='200'/>"
+                            + "<h4>" + content[j].name + "</h4>"
+                            + "<h4>" + content[j].brand + "</h4>"
+                            + "<p>" + content[j].price + "</p>"
+                            + "<div class=\"rating\">\n" +
+                            "            <i class=\"fa-solid fa-star\"></i>\n" +
+                            "            <i class=\"fa-solid fa-star\"></i>\n" +
+                            "            <i class=\"fa-solid fa-star\"></i>\n" +
+                            "            <i class=\"fa-solid fa-star\"></i>\n" +
+                            "            <i class=\"fa-regular fa-star\"></i>\n" +
+                            "            </div>"
+                            + "<div onclick='jump(" + content[j].id + ")'>add to cart</div></div>");
                     }
+
+                    /*for (var i = 0; i < content.length; i += 8) {
+                        var row = $("<div style='width:300px; height:auto; float:left; display:inline'></div>");
+                        var max = i + 8 > content.length ? 8 : content.length - 1 - i;
+                        for (var j = 0; j < max; j++) {
+                            row.append("<img src='" + content[j].thumbnail + "' width='100' height='200'/>"
+                                + "<div>" + content[j].name + "</div>"
+                                + "<div>" + content[j].brand + "</div>"
+                                + "<div>" + content[j].price + "</div>"
+                                + "<div onclick='jump(" + content[j].id + ")'>add to cart</div></div>");
+                        }
+
+
+
+                    }*/
                 }
             });
         });
@@ -49,9 +77,6 @@
 
     
     <div class="container">
-        <div id="test">
-
-        </div>
         <div class="navbar">
             <div class = "logo">
                 <img src="images/logo.png" width="125px">
@@ -106,8 +131,8 @@
 <!------ featured products-------->
 <div class="small-container">
     <h2 class="title">Featured Products</h2>
-    <div class="row">
-        <div class="col-4">
+    <div class="row"  id="products">
+        <!--<div class="col-4">
             <img src="images/product-1.jpg">
             <h4>Red Printed T-shirt</h4>
             <div class="rating">
@@ -158,7 +183,7 @@
             </div>
             
             <p>$20.00</p>
-        </div>
+        </div>-->
     </div>
     <h2 class="title">Latest Products</h2>
     <div class="row">
