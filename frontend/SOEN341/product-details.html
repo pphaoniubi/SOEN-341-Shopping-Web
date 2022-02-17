@@ -24,15 +24,18 @@
 <script type="text/javascript" src="./jquery/jquery-3.6.0.js"></script>
 <script src="./jquery/jquery-3.6.0.js"></script>
 <script>
-  var Id;
-  $(function(){
-           getData1();
-        });
+  //var Id;
+  var url;
+  
         function getData1(){
             Id = UrlParm.parm("id");
+            alert(Id);
+            url = 'https://d46a-172-98-153-208.ngrok.io/item/' + Id;
+    alert(url);
         }
+        getData1();
 
-    var url = 'https://d46a-172-98-153-208.ngrok.io/item/' + Id;
+    
      $.ajax({
             type: 'GET',
             url: url,
@@ -41,8 +44,8 @@
             success: function(jqXHR) {
               
                     var parsedJson = jqXHR;
-                    alert(parsedJson.description);
-                    alert(parsedJson.name);
+                   // alert(parsedJson.description);
+                   // alert(parsedJson.name);
                     $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
                     $("#current").html("<h4>" + jqXHR.price + "</h4>");
                     $("#name").html("<h1>" + jqXHR.name + "</h1>");
