@@ -58,7 +58,7 @@ p {
 }
 .btn {
   display: inline-block;
-  background: #ff523b;
+  background: #701909;
   color: #fff;
   padding: 8px 30px;
   margin: 30px 0;
@@ -69,7 +69,7 @@ p {
   background: #563434;
 }
 .header {
-  background: radial-gradient(#fff, #88c276);
+  background: radial-gradient(#fff, #d6ffd6);
 }
 .header .row {
   margin-top: 30px;
@@ -113,7 +113,7 @@ p {
 
 .title::after {
   content: "";
-  background: #ff523b;
+  background: #d6ffd6;
   width: 80px;
   height: 5px;
   border-radius: 5px;
@@ -130,7 +130,7 @@ h4 {
   font-size: 14px;
 }
 .rating .fa {
-  color: #ff523b;
+  color: #d6ffd6;
 }
 .col-4:hover {
   transform: translateY(-5px);
@@ -267,7 +267,7 @@ th {
   text-align: left;
   padding: 5px;
   color: #fff;
-  background: #ff523b;
+  background: #701909;
   font-weight: normal;
 }
 
@@ -282,20 +282,38 @@ td input {
   padding: 5px;
 }
 td a {
-  color: #ff523b;
+  color: #701909;
   font-size: 12px;
 }
 td img {
   margin-right: 10px;
 }
+/*--------total balance page----------*/
 
+.total-price {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+}
+
+.total-price table {
+  border-top: 3px solid #701909;
+  width: 100%;
+  max-width: 350px;
+}
+td:last-child {
+  text-align: right;
+}
+th:last-child {
+  text-align: right;
+}
 /*--------all products page----------*/
 .row-2 {
   justify-content: space-between;
   margin: 100px auto 50px;
 }
 select {
-  border: 1px solid #ff523b;
+  border: 1px solid #d6ffd6;
   padding: 5px;
 }
 select :focus {
@@ -307,7 +325,7 @@ select :focus {
 }
 .page-btn span {
   display: inline-block;
-  border: 1px solid #ff523b;
+  border: 1px solid #701909;
   margin-left: 10px;
   width: 40px;
   height: 40px;
@@ -315,7 +333,7 @@ select :focus {
   cursor: pointer;
 }
 .page-btn span:hover {
-  background: #ff523b;
+  background: #701909;
   color: #fff;
 }
 
@@ -349,11 +367,11 @@ select :focus {
   padding-left: 10px;
   font-size: 20px;
   margin-right: 10px;
-  border: 1px solid #ff523b;
+  border: 1px solid #d6ffd6;
 }
 
 .single-product .fa {
-  color: #ff523b;
+  color: #d6ffd6;
 }
 input:focus {
   outline: none;
