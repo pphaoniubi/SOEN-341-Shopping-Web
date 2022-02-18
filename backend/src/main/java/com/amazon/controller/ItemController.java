@@ -18,15 +18,20 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/customer/item")
-public class CustomerItemController {
+@RequestMapping("/item")
+public class ItemController {
 
     private final CustomerItemService customerItemService;
 
-    public CustomerItemController(CustomerItemService customerItemService) {
+    public ItemController(CustomerItemService customerItemService) {
         this.customerItemService = customerItemService;
     }
 
+    /**
+     * query all for sale items by pagination
+     * @param pageable
+     * @return
+     */
     @GetMapping
     public Page<ItemListDto> findAllForSaleItems(Pageable pageable) {
         Page<Item> itemPage = customerItemService.findAllForSaleItems(pageable);
@@ -34,6 +39,13 @@ public class CustomerItemController {
         return new PageImpl<>(itemListDtos, pageable, itemPage.getTotalElements());
     }
 
+    /**
+     * query item detail by item id
+     * @param id
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @GetMapping("/{id}")
     public ItemDetailDto findOneForSaleItemById(@PathVariable("id") int id,
                                                 HttpServletResponse response) throws IOException {
