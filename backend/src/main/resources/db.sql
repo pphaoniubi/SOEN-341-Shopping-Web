@@ -1,5 +1,25 @@
 CREATE DATABASE shoppingweb;
 
+CREATE TABLE account
+(
+    id         SERIAL PRIMARY KEY,
+    username   VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name  VARCHAR(50) NOT NULL,
+    password   VARCHAR(50) NOT NULL,
+    email      VARCHAR(150),
+    role_id    INTEGER REFERENCES role (id) ON DELETE CASCADE
+);
+
+CREATE TABLE role
+(
+    id          SERIAL PRIMARY KEY,
+    name        VARCHAR(30) UNIQUE NOT NULL
+);
+
+INSERT INTO role VALUES(1, 'CUSTOMER');
+INSERT INTO role VALUES(2, 'ADMIN');
+
 CREATE TABLE customer
 (
     id         SERIAL PRIMARY KEY,
@@ -44,7 +64,6 @@ CREATE TABLE address
 (
     id          SERIAL PRIMARY KEY,
     customer_id INTEGER REFERENCES customer (id) ON DELETE CASCADE,
-    type        VARCHAR(100),
     content     VARCHAR(500),
     enabled     BOOLEAN DEFAULT FALSE
 );
