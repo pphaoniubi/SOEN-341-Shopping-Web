@@ -1,5 +1,6 @@
 package com.amazon.controller;
 
+import com.amazon.dto.CustomerShoppingCartCreationDto;
 import com.amazon.entity.Account;
 import com.amazon.entity.Item;
 import com.amazon.entity.ShoppingCart;
@@ -44,7 +45,7 @@ public class CustomerShoppingCartController {
     }
 
     @PostMapping
-    public void addItemsToCart(@RequestBody Map<Integer, Integer> itemIdQuantityMap,
+    public void addItemsToCart(@RequestBody List<CustomerShoppingCartCreationDto> customerShoppingCartCreationDtos,
                                HttpServletResponse response) throws IOException {
 
         long accountId = Util.getCurrentUser().getAccountId();
@@ -53,13 +54,14 @@ public class CustomerShoppingCartController {
             response.sendError(HttpStatus.NOT_FOUND.value(), "The account doesn't exist in our system. Please login again.");
             return;
         }
-        Set<Integer> itemIds = itemIdQuantityMap.keySet();
+        Set<Integer> itemIds = customerShoppingCartCreationDtos.stream().map(CustomerShoppingCartCreationDto::getItemId).collect(Collectors.toSet());
         List<Item> items = itemService.findAllByItemIds(itemIds);
         if (CollectionUtils.isEmpty(items)) {
             response.sendError(HttpStatus.NOT_FOUND.value(), "These item ids don't exist in our system.");
             return;
         }
         Map<Integer, Item> itemMap = items.stream().collect(Collectors.toMap(item -> item.getId(), item -> item));
+        Map<Integer, Integer> itemIdQuantityMap = customerShoppingCartCreationDtos.stream().collect(Collectors.toMap(dto -> dto.getItemId(), dto -> dto.getQuantity()));
         double totalAmount = items.stream().mapToDouble(item -> itemIdQuantityMap.get(item.getId()) * item.getPrice()).sum();
         Account account = accountOptional.get();
         ShoppingCart shoppingCart = customerShoppingCartService.findShoppingCartByAccountId(accountId);
