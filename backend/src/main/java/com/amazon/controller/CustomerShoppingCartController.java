@@ -46,6 +46,7 @@ public class CustomerShoppingCartController {
     @PostMapping
     public void addItemsToCart(@RequestBody Map<Integer, Integer> itemIdQuantityMap,
                                HttpServletResponse response) throws IOException {
+
         long accountId = Util.getCurrentUser().getAccountId();
         Optional<Account> accountOptional = accountService.findByAccountId(accountId);
         if (!accountOptional.isPresent()) {

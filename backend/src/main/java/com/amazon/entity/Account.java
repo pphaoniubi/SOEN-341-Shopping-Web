@@ -93,7 +93,6 @@ public class Account {
         this.role = role;
     }
 
-
     public Account(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,10 +104,5 @@ public class Account {
 
     public Account() {
 
-    }
-
-    //dont know how to solve
-    public boolean isPresent() {
-        return false;
     }
 }
