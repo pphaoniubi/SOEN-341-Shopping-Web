@@ -1,38 +1,35 @@
 package com.amazon.service;
 
 import com.amazon.entity.Account;
+import com.amazon.entity.Role;
+import com.amazon.registration.EmailValidator;
+import com.amazon.dto.RegisterDto;
 import com.amazon.repository.AccountRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import java.util.Optional;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Service
-public class AccountService implements UserDetailsService {
+public class AccountService {
 
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    public AccountService(AccountRepository accountRepository1, @Lazy BCryptPasswordEncoder bCryptPasswordEncoder1){
+    private final EmailValidator emailValidator;
+
+    public AccountService(AccountRepository accountRepository1, BCryptPasswordEncoder bCryptPasswordEncoder,
+                          EmailValidator emailValidator){
         this.accountRepository = accountRepository1;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder1;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.emailValidator = emailValidator;
     }
 
     public Account login(String email, String password, HttpServletRequest request) throws ServletException {
@@ -43,32 +40,25 @@ public class AccountService implements UserDetailsService {
         return (Account) RequestContextHolder.getRequestAttributes().getAttribute("loginAccount", RequestAttributes.SCOPE_REQUEST);
     }
 
-    public Optional<Account> findByAccountId(int accountId) {
+    public Optional<Account> findByAccountId(long accountId) {
         return accountRepository.findById(accountId);
     }
 
-    public String signUpAccount(Account account) {
-       boolean accountExists = accountRepository
-                .findByEmail(account.getEmail())
-                .isPresent();  //undefined function
-
-        if(accountExists){
+    public Account register(RegisterDto request) {
+        boolean isValidEmail = emailValidator.test(request.getEmail());
+        if (!isValidEmail){
+            throw new IllegalStateException("email not valid");
+        }
+        Account account = accountRepository.findByEmail(request.getEmail());
+        if (Objects.nonNull(account)) {
             throw new IllegalStateException("email already taken");
         }
 
-        String encodedPassword = bCryptPasswordEncoder
-                .encode(account.getPassword());
+        String encodedPassword = bCryptPasswordEncoder.encode(request.getPassword());
 
-        account.setPassword(encodedPassword);
+        account = new Account(request.getFirstName(), request.getLastName(), request.getEmail(), encodedPassword, new Role(1, "CUSTOMER"));
 
         accountRepository.save(account);
-        // TODO: Send confirmation token
-
-        return "it works";
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return account;
     }
 }

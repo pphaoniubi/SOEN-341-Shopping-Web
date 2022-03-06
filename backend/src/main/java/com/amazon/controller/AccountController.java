@@ -3,12 +3,8 @@ package com.amazon.controller;
 import com.amazon.dto.AccountDto;
 import com.amazon.dto.LoginDto;
 import com.amazon.entity.Account;
-import com.amazon.entity.Role;
 import com.amazon.mapper.AccountMapper;
-import com.amazon.registration.AccountRole;
-import com.amazon.registration.RegistrationRequest;
-import com.amazon.registration.RegistrationService;
-import com.amazon.repository.AccountRepository;
+import com.amazon.dto.RegisterDto;
 import com.amazon.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,21 +22,16 @@ import java.io.IOException;
 public class AccountController {
 
     private final AccountService accountService;
-    private final AccountRepository accountRepository;
-    private RegistrationService registrationService;
 
-    public AccountController(AccountService accountService, AccountRepository accountRepository,
-                             RegistrationService registrationService) {
+    public AccountController(AccountService accountService) {
         this.accountService = accountService;
-        this.accountRepository = accountRepository;
-        this.registrationService = registrationService;
     }
 
-    @PostMapping(value = "/login", consumes = "application/json")
+    @PostMapping("/login")
     public AccountDto login(@Valid @RequestBody LoginDto loginDto,
                             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Account account = null;
+        Account account;
         try {
             account = accountService.login(loginDto.getEmail(), loginDto.getPassword(), request);
         } catch (Exception e) {
@@ -50,18 +41,16 @@ public class AccountController {
         return AccountMapper.INSTANCE.map(account);
     }
 
-   /* @PostMapping(value = "/register", consumes = "application/json")
-    public String register(@Valid @RequestBody Account account, RegistrationRequest request, HttpServletResponse response) throws IOException {
+    @PostMapping("/register")
+    public AccountDto register(@RequestBody RegisterDto request,
+                               HttpServletResponse response) throws IOException {
+        Account account;
         try {
-           registrationService.register(request);
+            account = accountService.register(request);
         } catch (Exception e) {
-            response.sendError(HttpStatus.FORBIDDEN.value(), "Invalid email or password!");
+            response.sendError(HttpStatus.FORBIDDEN.value(), e.getMessage());
             return null;
         }
-        return registrationService.register(request);
-    }*/
-    @PostMapping(value = "/register", consumes = "application/json")
-    public String register(@RequestBody RegistrationRequest request) {
-        return registrationService.register(request);
+        return AccountMapper.INSTANCE.map(account);
     }
 }
