@@ -46,7 +46,8 @@ public class CustomerShoppingCartController {
     @PostMapping
     public void addItemsToCart(@RequestBody Map<Integer, Integer> itemIdQuantityMap,
                                HttpServletResponse response) throws IOException {
-        int accountId = Util.getCurrentUser().getAccountId();
+
+        long accountId = Util.getCurrentUser().getAccountId();
         Optional<Account> accountOptional = accountService.findByAccountId(accountId);
         if (!accountOptional.isPresent()) {
             response.sendError(HttpStatus.NOT_FOUND.value(), "The account doesn't exist in our system. Please login again.");

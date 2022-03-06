@@ -4,6 +4,7 @@ import com.amazon.dto.AccountDto;
 import com.amazon.dto.LoginDto;
 import com.amazon.entity.Account;
 import com.amazon.mapper.AccountMapper;
+import com.amazon.dto.RegisterDto;
 import com.amazon.service.AccountService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,15 +27,28 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping(value = "/login", consumes = "application/json")
+    @PostMapping("/login")
     public AccountDto login(@Valid @RequestBody LoginDto loginDto,
                             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Account account = null;
+        Account account;
         try {
             account = accountService.login(loginDto.getEmail(), loginDto.getPassword(), request);
         } catch (Exception e) {
             response.sendError(HttpStatus.FORBIDDEN.value(), "Invalid email or password!");
+            return null;
+        }
+        return AccountMapper.INSTANCE.map(account);
+    }
+
+    @PostMapping("/register")
+    public AccountDto register(@RequestBody RegisterDto request,
+                               HttpServletResponse response) throws IOException {
+        Account account;
+        try {
+            account = accountService.register(request);
+        } catch (Exception e) {
+            response.sendError(HttpStatus.FORBIDDEN.value(), e.getMessage());
             return null;
         }
         return AccountMapper.INSTANCE.map(account);

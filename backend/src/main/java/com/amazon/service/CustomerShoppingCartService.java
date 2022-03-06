@@ -12,7 +12,7 @@ public class CustomerShoppingCartService {
         this.customerShoppingCartRepository = customerShoppingCartRepository;
     }
 
-    public ShoppingCart findShoppingCartByAccountId(int accountId) {
+    public ShoppingCart findShoppingCartByAccountId(long accountId) {
         return customerShoppingCartRepository.findByAccount_Id(accountId);
     }
 

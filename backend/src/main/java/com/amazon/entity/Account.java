@@ -2,6 +2,8 @@ package com.amazon.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -12,7 +14,9 @@ import javax.persistence.Table;
 public class Account {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private long id;
 
     @Column(name = "username")
     private String username;
@@ -33,11 +37,11 @@ public class Account {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -87,5 +91,18 @@ public class Account {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Account(String firstName, String lastName, String email, String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = firstName + " " + lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Account() {
+
     }
 }
