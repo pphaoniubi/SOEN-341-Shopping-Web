@@ -2,12 +2,11 @@ package com.amazon.service;
 
 import com.amazon.entity.Account;
 import com.amazon.entity.Role;
-import com.amazon.registration.EmailValidator;
 import com.amazon.dto.RegisterDto;
 import com.amazon.repository.AccountRepository;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -22,13 +21,10 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final EmailValidator emailValidator;
 
-    public AccountService(AccountRepository accountRepository1, BCryptPasswordEncoder bCryptPasswordEncoder,
-                          EmailValidator emailValidator){
+    public AccountService(AccountRepository accountRepository1, BCryptPasswordEncoder bCryptPasswordEncoder){
         this.accountRepository = accountRepository1;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.emailValidator = emailValidator;
     }
 
     public Account login(String email, String password, HttpServletRequest request) throws ServletException {
@@ -44,13 +40,12 @@ public class AccountService {
     }
 
     public Account register(RegisterDto request) {
-        boolean isValidEmail = emailValidator.test(request.getEmail());
-        if (!isValidEmail){
-            throw new IllegalStateException("email not valid");
+        if (!EmailValidator.getInstance().isValid(request.getEmail())) {
+            throw new IllegalArgumentException("Email is not valid.");
         }
         Account account = accountRepository.findByEmail(request.getEmail());
         if (Objects.nonNull(account)) {
-            throw new IllegalStateException("email already taken");
+            throw new IllegalArgumentException("Email is already used.");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(request.getPassword());
