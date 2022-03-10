@@ -7,19 +7,19 @@ for(var i=0;i<removecarteButtoms.length;i++)
     var button=removecarteButtoms[i]
     button.addEventListener('click',function(event){
         var removebuttoncliked=event.target
-        //removebuttoncliked.parentElement.parentElement.parentElement.remove()
-        removebuttoncliked.closest('tr').remove()   
-
-
+        removebuttoncliked.parentElement.parentElement.remove()
+        //removebuttoncliked.closest('tr').remove()   
+        updateCartTotal() 
     });
-}/*
+}
+
 function updataCarteTotal(){
-    var cartPage=document.getElementsByClassName("small-container cart-page")[0]
-    var cartItems = cartPage.getElementsByClassName('"cart-items')
+    var cartItems=document.getElementsByClassName("cart-items")[0]
+    var cartRows = cartPage.getElementsByClassName('cart-info')
     console.log(cartItems)
     
     var total = 0
-    for (var i = 0; i < cartItems.length; i++) {
+    for (var i = 0; i < cartRows.length; i++) {
         var cartitems = cartItems[i]
         var priceElement = cartitems.getElementsByClassName('cart-price')[0]
         var quantityElement = cartitems.getElementsByClassName('cart-quantity-input')[0]
@@ -33,4 +33,4 @@ function updataCarteTotal(){
     
 
 }
-*/
+
