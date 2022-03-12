@@ -29,9 +29,7 @@
   
         function getData1(){
             Id = UrlParm.parm("id");
-            alert(Id);
             url = 'https://d46a-172-98-153-208.ngrok.io/item/' + Id;
-    alert(url);
         }
         getData1();
 
@@ -47,8 +45,9 @@
                    // alert(parsedJson.description);
                    // alert(parsedJson.name);
                     $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
-                    $("#current").html("<h4>" + jqXHR.price + "</h4>");
+                    $("#current").html("<h4>" + jqXHR.price + "$" + "</h4>");
                     $("#name").html("<h1>" + jqXHR.name + "</h1>");
+                    $("#brand").html("<h1>" + jqXHR.brand + "</h1>");
             }
 ,
             error: function(jqXHR){
@@ -61,6 +60,7 @@
 
   </head>
   <body>
+    
     <div class="container">
       <div class="navbar">
         <div class="logo">
@@ -88,6 +88,7 @@
         </div>
         <div class="col-2">
           <p id="name">Home / Jacket</p>
+          <h1 id="brand"></h1>
           <h1 id="current"></h1>
 
           <select>
@@ -99,14 +100,16 @@
             <option>S</option>
           </select>
           <input type="number" value="1" />
-          <a herf="" class="btn">Add To Cart</a>
+          <a href="file:///C:/Users/lee/Desktop/SOEN341/SOEN-341-Shopping-Web/frontend/SOEN341/cart.html" class="btn">Add To Cart</a>
+
           <h3>Product Details<i class="fa fa-indent"></i></h3>
+          
           <br />
-          <p>
-            This jacket is a garment for the upper body, usually extending below
-            the hips. This jacket typically has sleeves, and fastens in the
-            front or slightly on the side.
-          </p>
+              <!--<p>
+                This jacket is a garment for the upper body, usually extending below
+                the hips. This jacket typically has sleeves, and fastens in the
+                front or slightly on the side.
+              </p>-->
         </div>
       </div>
     </div>
@@ -119,7 +122,7 @@
     </div>
 
     <!-- products  -->
-
+<!--
     <div class="small-container">
       <div class="row">
         <div class="col-4">
@@ -176,7 +179,7 @@
         </div>
       </div>
     </div>
-
+-->
     <!------footer------>
     <div class="footer">
       <div class="small-container">
@@ -192,8 +195,7 @@
           <div class="footer-col-2">
             <img src="images/logo-white.png" />
             <p>
-              Our Purpose is to sustainably make the pleasure and benefit of
-              sport accessible to the many
+              Our Purpose is to build a shopping website for SOEN341
             </p>
           </div>
           <div class="footer-col-3">
@@ -216,7 +218,7 @@
           </div>
         </div>
         <hr />
-        <p class="copyright">Copyright 2022 - Yen-Ju Lee</p>
+        <p class="copyright">Copyright 2022 - SOEN341 team 13</p>
       </div>
     </div>
 
