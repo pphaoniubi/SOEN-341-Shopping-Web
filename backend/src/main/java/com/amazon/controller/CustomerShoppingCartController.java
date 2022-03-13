@@ -69,7 +69,7 @@ public class CustomerShoppingCartController {
         List<ShoppingItem> shoppingItems = customerShoppingService.findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
         Map<Integer, Integer> itemIdQuantityMap = shoppingCartChangeDtos.stream().collect(Collectors
                 .toMap(dto -> dto.getItemId(), dto -> dto.getQuantity()));
-        return customerShoppingService.updateShoppingInfo(account, shoppingCart, shoppingItems, itemIdQuantityMap);
+        return customerShoppingService.updateShoppingInfo(shoppingCart, shoppingItems, itemIdQuantityMap);
     }
 
     @DeleteMapping("/{shoppingCartId}/shoppingItem")
