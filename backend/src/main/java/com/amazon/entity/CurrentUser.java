@@ -8,14 +8,14 @@ import java.util.Collection;
 
 public class CurrentUser extends User implements Serializable {
 
-    private final long accountId;
+    private final int accountId;
 
     public CurrentUser(Account account, Collection<? extends GrantedAuthority> authorities) {
         super(account.getEmail(), account.getPassword(), authorities);
         this.accountId = account.getId();
     }
 
-    public long getAccountId(){
+    public int getAccountId(){
         return accountId;
     }
 

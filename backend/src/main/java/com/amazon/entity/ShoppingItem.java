@@ -2,6 +2,8 @@ package com.amazon.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,6 +15,8 @@ import javax.persistence.Table;
 public class ShoppingItem {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private int id;
 
     @OneToOne
@@ -30,7 +34,7 @@ public class ShoppingItem {
     private ShoppingCart shoppingCart;
 
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
 
     public ShoppingItem() {}
 
@@ -81,11 +85,11 @@ public class ShoppingItem {
         this.shoppingCart = shoppingCart;
     }
 
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(Integer orderId) {
         this.orderId = orderId;
     }
 }

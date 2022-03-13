@@ -1,6 +1,6 @@
 package com.amazon.dto;
 
-public class CustomerShoppingCartCreationDto {
+public class ShoppingCartChangeDto {
     private int itemId;
     private int quantity;
 

@@ -20,16 +20,6 @@ CREATE TABLE role
 INSERT INTO role VALUES(1, 'CUSTOMER');
 INSERT INTO role VALUES(2, 'ADMIN');
 
-CREATE TABLE customer
-(
-    id         SERIAL PRIMARY KEY,
-    username   VARCHAR(50) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    last_name  VARCHAR(50) NOT NULL,
-    password   VARCHAR(50) NOT NULL,
-    email      VARCHAR(150)
-);
-
 CREATE TABLE item
 (
     id          INTEGER PRIMARY KEY,
@@ -46,9 +36,9 @@ CREATE TABLE item
 CREATE TABLE shopping_cart
 (
     id           SERIAL PRIMARY KEY,
-    customer_id  INTEGER REFERENCES customer (id) ON DELETE CASCADE,
+    account_id  INTEGER REFERENCES account (id) ON DELETE CASCADE,
     total_amount DOUBLE PRECISION NOT NULL,
-    UNIQUE (customer_id)
+    UNIQUE (account_id)
 );
 
 CREATE TABLE payment
