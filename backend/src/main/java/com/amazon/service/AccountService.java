@@ -5,6 +5,7 @@ import com.amazon.entity.Role;
 import com.amazon.dto.RegisterDto;
 import com.amazon.repository.AccountRepository;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AccountService(AccountRepository accountRepository1, BCryptPasswordEncoder bCryptPasswordEncoder){
-        this.accountRepository = accountRepository1;
+    public AccountService(AccountRepository accountRepository, BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.accountRepository = accountRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -35,8 +36,12 @@ public class AccountService {
         return (Account) RequestContextHolder.getRequestAttributes().getAttribute("loginAccount", RequestAttributes.SCOPE_REQUEST);
     }
 
-    public Optional<Account> findByAccountId(long accountId) {
-        return accountRepository.findById(accountId);
+    public Account findById(int accountId) {
+        Optional<Account> accountOptional = accountRepository.findById(accountId);
+        if (!accountOptional.isPresent()) {
+            throw new IllegalArgumentException("The account doesn't exist in our system. Please login again.");
+        }
+        return accountOptional.get();
     }
 
     public Account register(RegisterDto request) {

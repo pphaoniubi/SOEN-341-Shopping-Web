@@ -2,7 +2,9 @@ package com.amazon.service;
 
 import com.amazon.entity.Item;
 import com.amazon.repository.ItemRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +18,10 @@ public class ItemService {
     }
 
     public List<Item> findAllByItemIds(Collection<Integer> itemIds) {
-        return itemRepository.findAllByIdIn(itemIds);
+        List<Item> items = itemRepository.findAllByIdIn(itemIds);
+        if (CollectionUtils.isEmpty(items)) {
+            throw new IllegalArgumentException("These item ids don't exist in our system.");
+        }
+        return items;
     }
 }

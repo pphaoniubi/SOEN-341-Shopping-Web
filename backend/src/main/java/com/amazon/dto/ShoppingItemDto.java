@@ -1,17 +1,41 @@
 package com.amazon.dto;
 
-import com.amazon.entity.Item;
-import com.amazon.entity.ShoppingCart;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 public class ShoppingItemDto {
 
     private int id;
-    private Item item;
+    private ItemDetailDto itemDetailDto;
     private int quantity;
-    private ShoppingCart shoppingCart;
-    private int orderId;
+    private double price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ItemDetailDto getItemDetailDto() {
+        return itemDetailDto;
+    }
+
+    public void setItemDetailDto(ItemDetailDto itemDetailDto) {
+        this.itemDetailDto = itemDetailDto;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
