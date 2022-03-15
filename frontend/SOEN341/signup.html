@@ -15,7 +15,7 @@
        
         $.ajax({
             type: "post",
-            url: "https://405c-206-176-145-172.ngrok.io/account/register",
+            url: "https://8cde-206-176-145-172.ngrok.io/account/register",
             // The key needs to match your method's input parameter (case-sensitive).
             data: JSON.stringify({ "firstName": $('#firstname').val(),
              "lastName": $('#lastname').val(),
@@ -24,7 +24,10 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             headers: { 'api-key':'myKey' },
-            success: function(data){alert(data);},
+            success: function(data){
+                alert(data.content);
+                jump();
+            console.log(data)},
             error: function(errMsg) {
                 alert('error');
             }
@@ -34,6 +37,10 @@
    
 
 });
+function jump() {
+            var url_1 = "file:///C:/Users/lee/Desktop/SOEN341/SOEN-341-Shopping-Web/frontend/SOEN341/product.html";
+        window.location.href=url_1;
+        }
     </script>
     
 
@@ -62,7 +69,7 @@
             <label for="notification">receive upcoming offers and event mails <a href=""></a></label>
             <button type="submit" class="submit-btn" id="submit-btn">create account</button>
         </div>
-        <a href="login.html" class="link">already have an account? Log in here</a>
+        <a href="file:///C:/Users/lee/Desktop/SOEN341/SOEN-341-Shopping-Web/frontend/SOEN341/login.html" class="link">already have an account? Log in here</a>
     </div>
 
    

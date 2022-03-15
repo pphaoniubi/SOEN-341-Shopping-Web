@@ -19,7 +19,7 @@
 <script type="text/javascript" src="./jquery/jquery-3.6.0.js"></script>
 <script src="./jquery/jquery-3.6.0.js"></script>
 <script>
-    const url = 'http://d46a-172-98-153-208.ngrok.io/item?page=0&size=20&sort=price,desc';
+    const url = 'http://8cde-206-176-145-172.ngrok.io/item?page=0&size=20&sort=price,desc';
    
      $.ajax({
             type: 'GET',
@@ -38,9 +38,9 @@
                     row.append("<img src='" + content[j].thumbnail + "' width='200' height='200'/>"
                     + "<h4>" + content[j].name + "</h4>"
                     + "<h4>" + content[j].brand + "</h4>"
-                    + "<p>" + content[j].price + "</p>"
-                   
-                    + "<div onclick='jump(" + content[j].id + ")'>add to cart</div></div>");
+                    + "<p>" + content[j].price + "$" +  "</p>"
+                    + "<button onclick='jump(" + content[j].id + ")'>check detailed</button></div>"
+                    );
                 }
                     
             }
@@ -52,7 +52,6 @@
             console.log(arguments);
         });
         function jump(id) {
-            alert("jump" + id);
             var url_1 = "file:///C:/Users/lee/Desktop/SOEN341/SOEN-341-Shopping-Web/frontend/SOEN341/product-details.html?id=" + id;
         window.location.href=url_1;
         }
@@ -100,63 +99,6 @@
     <div class="row" id="products">
     </div>
 
-   
-    
-        <div class="row">
-            <div class="col-4">
-                <img src="images/product-9.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                </div>
-                
-                <p>$20.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/product-10.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-                
-                <p>$20.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/product-11.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
-                </div>
-                
-                <p>$20.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/product-12.jpg">
-                <h4>Red Printed T-shirt</h4>
-                <div class="rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-                
-                <p>$20.00</p>
-            </div>
-        </div>
-
         <div class="page-btn">
             <span>1</span>
             <span>2</span>
@@ -181,7 +123,7 @@
                 </div>
                 <div class="footer-col-2">
                     <img src="images/logo-white.png">
-                    <p>Our Purpose is to sustainably make the pleasure and benefit of sport accessible to the many</p>
+                    <p>Our Purpose is to build a shopping website for SOEN341</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Useful Links</h3>
@@ -203,7 +145,7 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">Copyright 2022 - Yen-Ju Lee</p>
+            <p class="copyright">Copyright 2022 - SOEN341 team13</p>
         </div>
     </div>
 
