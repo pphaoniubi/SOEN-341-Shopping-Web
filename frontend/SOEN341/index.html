@@ -13,12 +13,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <script type="text/javascript" src="./jquery/jquery-3.6.0.js"></script>
+<script src="index.js"></script>
 <script>
     const url = 'https://b0ff-172-98-153-208.ngrok.io/item/1';
      $.ajax({
             type: 'GET',
             url: url,
-            dataType: 'json',
+            dataType: 'application/json',
 
             success: function(jqXHR) {
                // alert(jqXHR.readyState);
@@ -56,11 +57,25 @@
                     <li><a href="">Account</a></li>
                 </ul>
             </nav>
-            <img src="images/cart.png" width="30px" height="30px">
+            <form action="file:///C:/Users/Administrator/Desktop/SOEN-341-Shopping-Web/frontend/SOEN341/cart.html">   
+                <button type="submit">
+                    <img src="images/cart.png" width="30px" height="30px">
+                </button>
+            </form>
             <img src="images/menu.png" class="menu-icon" 
             onclick="menutoggle()">
         </div>
-
+        <div class="SearchBar">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <form class="example" action="action_page.php" method="POST">
+                <input type="text" placeholder="Search.." name="search">
+                <button id="searchButton"><i class="fa fa-search"></i></button>
+            </form>
+                <input type="checkbox" id="SearchOneByID" name="SearchOneByID" value="ID">
+                <label for="SearchOneByID"> Search Item By ID</label><br>
+        </div>
+               
+            
         <div class="row">
             <div class="col-2">
 
