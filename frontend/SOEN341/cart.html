@@ -17,6 +17,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <script src="cart.js" async></script>
   </head>
   <body>
     <div class="container">
@@ -37,16 +38,12 @@
         <img src="images/menu.png" class="menu-icon" onclick="menutoggle()" />
       </div>
     </div>
-    <!-- single product details  -->
-
-    <!-- title  -->
-
-    <!-- products  -->
 
     <!-- cart items details  -->
     <div class="small-container cart-page">
       <table>
         <!-- inside table row  -->
+
         <tr>
           <!-- table head  -->
           <th>Product</th>
@@ -54,76 +51,97 @@
           <th>Subtotal</th>
         </tr>
         <!-- This is where we insert table data, display content that we want to insert in table  -->
-        <tr>
-          <td>
-            <div class="cart-info">
-              <!-- This is where we add images  -->
-              <img
-                src="images/pexels-hassan-ouajbir-887898.jpg"
-                width="150px"
-                height="150px"
-              />
-              <!--This is where images need to match with description  -->
-              <div>
-                <p>Leather Jacket Women</p>
-                <small>price:$69.99</small>
-                <br />
-                <!-- Using br to go to the next line  -->
-                <a href="">Remove</a>
+        <div class="cart-items">
+          <tr>
+            <td>
+              <div class="cart-info">
+                <!-- This is where we add images  -->
+                <img
+                  src="images/pexels-hassan-ouajbir-887898.jpg"
+                  width="150px"
+                  height="150px"
+                />
+                <!--This is where images need to match with description  -->
+                <div class = "item-info">
+                  <p>Leather Jacket Women</p>
+                  <span class = "cart-price">$69.99</span>
+                  <br />
+                  <!-- Using br to go to the next line  -->
+
+                  <button class="btn btn-rm" type="button">Remove</button>
+                </div>
               </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$69.99</td>
-        </tr>
+            </td>
+            <td><input class = "cart-quantity-input" type="number" value="1" /></td>
+            <td>$69.99</td>
+          </tr>
+        </div>
+
         <!--This is where the second table needs to be added  -->
-        <tr>
-          <td>
-            <div class="cart-info">
-              <!-- This is where we add images  -->
-              <img
-                src="images/pexels-godisable-jacob-818992.jpg"
-                width="150px"
-                height="150px"
-              />
-              <!--This is where images need to match with description  -->
-              <div>
-                <p>Leather Jacket Women</p>
-                <small>price:$69.99</small>
-                <br />
-                <!-- Using br to go to the next line  -->
-                <a href="">Remove</a>
+        <div class="cart-items">
+          <tr>
+            <td>
+              <div class="cart-info">
+                <!-- This is where we add images  -->
+                <img
+                  src="images/pexels-godisable-jacob-818992.jpg"
+                  width="150px"
+                  height="150px"
+                />
+                <!--This is where images need to match with description  -->
+                <div  class = "item-info">
+                  <p>Leather Jacket Women</p>
+                  <span class = "cart-price">$69.99</span>
+                  <br />
+                  <!-- Using br to go to the next line  -->
+
+                  <button class="btn btn-rm" type="button">Remove</button>
+                </div>
               </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$99.99</td>
-        </tr>
+            </td>
+            <td><input  class = "cart-quantity-input" type="number" value="1" /></td>
+            <td>$69.99</td>
+          </tr>
+        </div>
 
         <!--This is where the third procuct needs to be added  -->
-        <tr>
-          <td>
-            <div class="cart-info">
-              <!-- This is where we add images  -->
-              <img
-                src="images/pexels-cottonbro-6764726.jpg"
-                width="150px"
-                height="150px"
-              />
-              <!--This is where images need to match with description  -->
-              <div>
-                <p>Leather Jacket Women</p>
-                <small>price:$39.99</small>
-                <br />
-                <!-- Using br to go to the next line  -->
-                <a href="">Remove</a>
+
+        <div class="cart-items">
+          <tr>
+            <td>
+              <div class="cart-info">
+                <!-- This is where we add images  -->
+                <img
+                  src="images/pexels-cottonbro-6764726.jpg"
+                  width="150px"
+                  height="150px"
+                />
+                <!--This is where images need to match with description  -->
+                <div  class = "item-info">
+                  <p>Leather Jacket Women</p>
+                  <span class = "cart-price">$39.99</span>
+                  <br />
+                  <!-- Using br to go to the next line  -->
+
+                  <button class="btn btn-rm" type="button">Remove</button>
+                </div>
               </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$69.99</td>
-        </tr>
+            </td>
+            <td><input class = "cart-quantity-input" type="number" value="1" /></td>
+            <td>$39.99</td>
+          </tr>
+        </div>
       </table>
+
+      <!--This is where we added the price  -->
+      <div class="total-price">
+        <table>
+          <tr>
+            <td>Total</td>
+            <td>$239.97</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <!------footer------>
@@ -134,12 +152,13 @@
             <h3>Download our app</h3>
             <p>Download app for Android and IOS mobile phone</p>
             <div class="app-logo">
-              <img src="images/play-store.png" />
-              <img src="images/app-store.png" />
+              <img src="images/paypal.png" />
+              <img src="images/app stode.png" />
             </div>
           </div>
           <div class="footer-col-2">
-            <img src="images/logo-white.png" />
+            <!------ <img src="images/logo-white.png" />
+            ------>
             <p>
               Our Purpose is to sustainably make the pleasure and benefit of
               sport accessible to the many
@@ -182,5 +201,6 @@
         }
       }
     </script>
+    <!--------This is where we linked to cart javascript---------->
   </body>
 </html>
