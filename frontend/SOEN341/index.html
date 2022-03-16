@@ -66,10 +66,9 @@
             onclick="menutoggle()">
         </div>
         <div class="SearchBar">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-            <form class="example" action="action_page.php" method="POST">
-                <input type="text" placeholder="Search.." name="search">
-                <button id="searchButton"><i class="fa fa-search"></i></button>
+            <form action = "https://8cde-206-176-145-172.ngrok.io/item/byBrand?" method ="GET">
+                <input type="text" placeholder="Search.." name="brand">     <!--hard coded!!!-->
+                <button id="searchButton">Search</button>
             </form>
                 <input type="checkbox" id="SearchOneByID" name="SearchOneByID" value="ID">
                 <label for="SearchOneByID"> Search Item By ID</label><br>
