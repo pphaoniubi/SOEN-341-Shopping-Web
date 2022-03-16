@@ -5,13 +5,8 @@ import com.amazon.constant.PaymentType;
 public class PaymentDto {
 
     private int id;
-
-    private int accountId;
-
     private PaymentType paymentType;
-
     private String number;
-
     private boolean enabled;
 
     public int getId() {
@@ -20,14 +15,6 @@ public class PaymentDto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
     }
 
     public PaymentType getPaymentType() {

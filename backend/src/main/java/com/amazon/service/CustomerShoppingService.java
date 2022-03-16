@@ -46,11 +46,15 @@ public class CustomerShoppingService {
         return customerShoppingCartRepository.findByAccount_Id(accountId);
     }
 
+    public void deleteShoppingCart(ShoppingCart shoppingCart) {
+        customerShoppingCartRepository.delete(shoppingCart);
+    }
+
     private ShoppingCart saveShoppingCart(ShoppingCart shoppingCart) {
         return customerShoppingCartRepository.save(shoppingCart);
     }
 
-    private List<ShoppingItem> saveShoppingItems(Collection<ShoppingItem> shoppingItems) {
+    public List<ShoppingItem> saveShoppingItems(Collection<ShoppingItem> shoppingItems) {
         return customerShoppingItemRepository.saveAll(shoppingItems);
     }
 

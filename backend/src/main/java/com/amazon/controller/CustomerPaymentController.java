@@ -7,6 +7,7 @@ import com.amazon.mapper.PaymentMapper;
 import com.amazon.service.AccountService;
 import com.amazon.service.PaymentService;
 import com.amazon.util.Util;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class CustomerPaymentController {
     }
 
     @PostMapping
+    @Transactional
     public PaymentDto createPaymentMethod(@RequestBody PaymentChangeDto paymentChangeDto) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
@@ -38,6 +40,7 @@ public class CustomerPaymentController {
     }
 
     @PutMapping("/{paymentId}")
+    @Transactional
     public PaymentDto updatePaymentMethod(@PathVariable int paymentId,
                                           @RequestBody PaymentChangeDto paymentChangeDto) {
         int accountId = Util.getCurrentUser().getAccountId();
@@ -46,6 +49,7 @@ public class CustomerPaymentController {
     }
 
     @GetMapping
+    @Transactional(readOnly = true)
     public List<PaymentDto> getAllPaymentMethods() {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
@@ -53,6 +57,7 @@ public class CustomerPaymentController {
     }
 
     @DeleteMapping("/{paymentId}")
+    @Transactional
     public void deletePaymentMethod(@PathVariable int paymentId) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);

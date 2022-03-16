@@ -1,7 +1,11 @@
 package com.amazon.entity;
 
+import com.amazon.constant.OrderHistoryStatus;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +36,20 @@ public class OrderHistory {
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private OrderHistoryStatus status;
+
+    public OrderHistory() {}
+
+    public OrderHistory(Account account, double totalAmount, Payment payment, Address address, OrderHistoryStatus status) {
+        this.account = account;
+        this.totalAmount = totalAmount;
+        this.payment = payment;
+        this.address = address;
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -71,5 +89,13 @@ public class OrderHistory {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public OrderHistoryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderHistoryStatus status) {
+        this.status = status;
     }
 }

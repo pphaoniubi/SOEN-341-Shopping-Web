@@ -7,6 +7,7 @@ import com.amazon.mapper.AddressMapper;
 import com.amazon.service.AccountService;
 import com.amazon.service.AddressService;
 import com.amazon.util.Util;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ public class CustomerAddressController {
     }
 
     @PostMapping
+    @Transactional
     public AddressDto createAddress(@RequestBody AddressChangeDto addressChangeDto) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
@@ -38,6 +40,7 @@ public class CustomerAddressController {
     }
 
     @PutMapping("/{addressId}")
+    @Transactional
     public AddressDto updateAddress(@PathVariable int addressId,
                                           @RequestBody AddressChangeDto addressChangeDto) {
         int accountId = Util.getCurrentUser().getAccountId();
@@ -46,6 +49,7 @@ public class CustomerAddressController {
     }
 
     @GetMapping
+    @Transactional(readOnly = true)
     public List<AddressDto> getAllAddresss() {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
@@ -53,6 +57,7 @@ public class CustomerAddressController {
     }
 
     @DeleteMapping("/{addressId}")
+    @Transactional
     public void deleteAddress(@PathVariable int addressId) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
