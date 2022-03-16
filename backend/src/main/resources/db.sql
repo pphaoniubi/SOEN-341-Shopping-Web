@@ -44,7 +44,7 @@ CREATE TABLE shopping_cart
 CREATE TABLE payment
 (
     id          SERIAL PRIMARY KEY,
-    customer_id INTEGER REFERENCES customer (id) ON DELETE CASCADE,
+    account_id INTEGER REFERENCES account (id) ON DELETE CASCADE,
     type        VARCHAR(100),
     number      VARCHAR(500),
     enabled     BOOLEAN DEFAULT FALSE
@@ -53,7 +53,7 @@ CREATE TABLE payment
 CREATE TABLE address
 (
     id          SERIAL PRIMARY KEY,
-    customer_id INTEGER REFERENCES customer (id) ON DELETE CASCADE,
+    account_id INTEGER REFERENCES account (id) ON DELETE CASCADE,
     content     VARCHAR(500),
     enabled     BOOLEAN DEFAULT FALSE
 );
@@ -61,10 +61,11 @@ CREATE TABLE address
 CREATE TABLE order_history
 (
     id           SERIAL PRIMARY KEY,
-    customer_id  INTEGER REFERENCES customer (id) ON DELETE CASCADE,
+    account_id   INTEGER REFERENCES account (id) ON DELETE CASCADE,
     total_amount DOUBLE PRECISION NOT NULL,
     payment_id   INTEGER REFERENCES payment (id) ON DELETE CASCADE,
-    address_id   INTEGER REFERENCES address (id) ON DELETE CASCADE
+    address_id   INTEGER REFERENCES address (id) ON DELETE CASCADE,
+    status       VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE shopping_item
@@ -73,6 +74,6 @@ CREATE TABLE shopping_item
     item_id          INTEGER REFERENCES item (id) ON DELETE CASCADE,
     quantity         INTEGER DEFAULT 0,
     price            DOUBLE PRECISION NOT NULL,
-    shopping_cart_id INTEGER REFERENCES shopping_cart (id) ON DELETE CASCADE,
-    order_id         INTEGER REFERENCES order_history (id) ON DELETE CASCADE
+    shopping_cart_id INTEGER REFERENCES shopping_cart (id) ON DELETE SET NULL,
+    order_history_id INTEGER REFERENCES order_history (id) ON DELETE CASCADE
 );

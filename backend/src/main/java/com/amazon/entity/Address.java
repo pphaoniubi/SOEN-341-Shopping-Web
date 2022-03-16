@@ -28,6 +28,16 @@ public class Address {
     @Column(name = "enabled")
     private boolean enabled;
 
+    public Address() {
+
+    }
+
+    public Address(Account account, String content, boolean enabled) {
+        this.account = account;
+        this.content = content;
+        this.enabled = enabled;
+    }
+
     public int getId() {
         return id;
     }

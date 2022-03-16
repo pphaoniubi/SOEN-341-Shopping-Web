@@ -46,11 +46,15 @@ public class CustomerShoppingService {
         return customerShoppingCartRepository.findByAccount_Id(accountId);
     }
 
+    public void deleteShoppingCart(ShoppingCart shoppingCart) {
+        customerShoppingCartRepository.delete(shoppingCart);
+    }
+
     private ShoppingCart saveShoppingCart(ShoppingCart shoppingCart) {
         return customerShoppingCartRepository.save(shoppingCart);
     }
 
-    private List<ShoppingItem> saveShoppingItems(Collection<ShoppingItem> shoppingItems) {
+    public List<ShoppingItem> saveShoppingItems(Collection<ShoppingItem> shoppingItems) {
         return customerShoppingItemRepository.saveAll(shoppingItems);
     }
 
@@ -113,10 +117,10 @@ public class CustomerShoppingService {
             }
         }
         saveShoppingItems(shoppingItems);
-        return findShoppingInfo(account.getId());
+        return findShoppingInfo(shoppingCart);
     }
 
-    public ShoppingDto updateShoppingInfo(Account account, ShoppingCart shoppingCart, List<ShoppingItem> shoppingItems, Map<Integer, Integer> itemIdQuantityMap) {
+    public ShoppingDto updateShoppingInfo(ShoppingCart shoppingCart, List<ShoppingItem> shoppingItems, Map<Integer, Integer> itemIdQuantityMap) {
         Map<Integer, ShoppingItem> shoppingItemMap = shoppingItems.stream().collect(Collectors
                 .toMap(shoppingItem -> shoppingItem.getItem().getId(), shoppingItem -> shoppingItem));
         for (Map.Entry<Integer, Integer> entry : itemIdQuantityMap.entrySet()) {
@@ -128,6 +132,6 @@ public class CustomerShoppingService {
         double totalAmount = shoppingItems.stream().mapToDouble(shoppingItem -> shoppingItem.getQuantity() * shoppingItem.getPrice()).sum();
         shoppingCart.setTotalAmount(totalAmount);
         saveShoppingCart(shoppingCart);
-        return findShoppingInfo(account.getId());
+        return findShoppingInfo(shoppingCart);
     }
 }
