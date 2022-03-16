@@ -33,8 +33,8 @@ public class ShoppingItem {
     @JoinColumn(name = "shopping_cart_id", updatable = false)
     private ShoppingCart shoppingCart;
 
-    @Column(name = "order_id")
-    private Integer orderId;
+    @Column(name = "order_history_id")
+    private Integer orderHistoryId;
 
     public ShoppingItem() {}
 
@@ -85,11 +85,11 @@ public class ShoppingItem {
         this.shoppingCart = shoppingCart;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getOrderHistoryId() {
+        return orderHistoryId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderHistoryId(Integer orderId) {
+        this.orderHistoryId = orderId;
     }
 }

@@ -36,6 +36,17 @@ public class Payment {
     @Column(name = "enabled")
     private boolean enabled;
 
+    public Payment() {
+
+    }
+
+    public Payment(Account account, PaymentType paymentType, String number, boolean enabled) {
+        this.account = account;
+        this.paymentType = paymentType;
+        this.number = number;
+        this.enabled = enabled;
+    }
+
     public int getId() {
         return id;
     }

@@ -55,7 +55,7 @@ public class CustomerShoppingCartController {
         List<Integer> itemIds = shoppingCartChangeDtos.stream().map(ShoppingCartChangeDto::getItemId).collect(Collectors.toList());
         List<Item> items = itemService.findAllByItemIds(itemIds);
         Map<Integer, Integer> itemIdQuantityMap = shoppingCartChangeDtos.stream().collect(Collectors
-                .toMap(dto -> dto.getItemId(), dto -> dto.getQuantity()));
+                .toMap(ShoppingCartChangeDto::getItemId, ShoppingCartChangeDto::getQuantity));
         return customerShoppingService.addShoppingInfo(account, items, itemIdQuantityMap);
     }
 
@@ -68,7 +68,7 @@ public class CustomerShoppingCartController {
         ShoppingCart shoppingCart = customerShoppingService.findCustomerShoppingCart(account.getId(), shoppingCartId);
         List<ShoppingItem> shoppingItems = customerShoppingService.findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
         Map<Integer, Integer> itemIdQuantityMap = shoppingCartChangeDtos.stream().collect(Collectors
-                .toMap(dto -> dto.getItemId(), dto -> dto.getQuantity()));
+                .toMap(ShoppingCartChangeDto::getItemId, ShoppingCartChangeDto::getQuantity));
         return customerShoppingService.updateShoppingInfo(shoppingCart, shoppingItems, itemIdQuantityMap);
     }
 
