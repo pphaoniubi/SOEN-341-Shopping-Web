@@ -30,6 +30,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             headers: { 'api-key':'myKey' },
+             xhrFields: {
+                withCredentials: true
+            },
             success: function(data){
                 console.log(data);
                 console.log(data.id);
