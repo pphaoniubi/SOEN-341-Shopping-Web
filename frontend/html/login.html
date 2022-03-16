@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="ccs/signup.css">
+    <link rel="stylesheet" href="../css/signup.css">
     <script type="text/javascript" src="../js/domain.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
@@ -21,7 +21,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: BACKEND_DOMAIN + "/account/login",
+                        url: "https://9ce9-147-124-72-174.ngrok.io/account/login",
                         // The key needs to match your method's input parameter (case-sensitive).
                         data: JSON.stringify({
                             "email": email,
@@ -30,9 +30,10 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         headers: {'api-key': 'myKey'},
-                        xhrFields: {
-                            withCredentials: true
-                        },
+        //                xhrFields: {
+          //                  withCredentials: true
+            //            },
+                        
                         success: function (data) {
                             console.log(data);
                             console.log(data.id);
@@ -54,10 +55,10 @@
 </head>
 <body>
 
-<img src="images/loader.gif" class="loader">
+<img src="../images/loader.gif" class="loader">
 
 <div class="alert-box">
-    <img src="images/error.png" class="alert-img" alt="">
+    <img src="../images/error.png" class="alert-img" alt="">
     <p class="alert-msg">Error message</p>
 </div>
 
