@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-
     <link rel="stylesheet" href="ccs/signup.css">
     <script type="text/javascript" src="../js/domain.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#submit-btn').on('click', function () {
@@ -62,8 +62,7 @@
         <input type="password" autocomplete="off" id="password" placeholder="password">
 
         <input type="checkbox" checked class="checkbox" id="terms-and-cond">
-        <label for="terms-and-cond">agree to our <a href="">terms and
-            condition</a></label>
+        <label for="terms-and-cond">agree to our <a href="">terms and condition</a></label>
         <br>
         <input type="checkbox" class="checkbox" id="notification">
         <label for="notification">receive upcoming offers and event mails <a href=""></a></label>
@@ -71,8 +70,5 @@
     </div>
     <a href="login.html" class="link">already have an account? Log in here</a>
 </div>
-
-
-<script src="js/form.js"></script>
 </body>
 </html>

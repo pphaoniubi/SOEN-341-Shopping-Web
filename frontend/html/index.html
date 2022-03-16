@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../js/domain.js"></script>
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
     <script>
         $(function() {
             $.ajax({
@@ -29,24 +30,29 @@
                             row = $("<div class='col-4'></div>");
                             $("#products").append(row);
                         }
-                        row.append("<img src='" + content[j].thumbnail + "' width='200' height='200'/>"
+                        row.append("<div><img src='" + content[j].thumbnail + "' width='200' height='200'/>"
                             + "<h4>" + content[j].name + "</h4>"
                             + "<h4>" + content[j].brand + "</h4>"
                             + "<p>" + content[j].price + "$" + "</p>"
-                            + "<button onclick='jump(" + content[j].id + ")'>check detailed</button></div>"
+                            + "<a onclick='checkDetail(" + content[j].id + ")'>check detail</a>&nbsp;"
+                            + "<a onclick='addToCart(" + content[j].id + ")'>add to cart</a></div>"
                         );
                     }
                 },
                 error: function (jqXHR) {
-                    alert(jqXHR.statusText);
+                    // alert(jqXHR.statusText);
                 }
             }).done(function () {
                 console.log(arguments);
             });
         });
 
-        function jump(id) {
+        function checkDetail(id) {
             window.location.href = "product_details.html?id=" + id;
+        }
+
+        function addToCart(id) {
+
         }
     </script>
 </head>
