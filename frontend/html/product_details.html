@@ -1,154 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewreport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewreport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>All product-Shopping web</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <script type="text/javascript" src="../js/domain.js"></script>
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
     <script>
-      //var Id;
-      var url;
+        //var Id;
+        var url;
 
-      function getData1() {
-        Id = UrlParm.parm("id");
-        url = BACKEND_DOMAIN + "/item/" + Id;
-      }
+        function getData1() {
+            Id = UrlParm.parm("id");
+            url = BACKEND_DOMAIN + '/item/' + Id;
+        }
 
-      getData1();
+        getData1();
 
-      $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json",
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
 
-        success: function (jqXHR) {
-          var parsedJson = jqXHR;
-          // alert(parsedJson.description);
-          // alert(parsedJson.name);
-          $("#id").html("<h4>" + jqXHR.id + "</h4>");
-          $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
-          $("#current").html("<h4>" + jqXHR.price + "$" + "</h4>");
-          $("#name").html("<h1>" + jqXHR.name + "</h1>");
-          $("#brand").html("<h1>" + jqXHR.brand + "</h1>");
-        },
-        error: function (jqXHR) {
-          alert(jqXHR.statusText);
-        },
-      }).done(function () {
-        console.log(arguments);
-      });
-    </script>
-    <script>
-      $(function () {
-        $("#cart-btn").on("click", function () {
-          var id = $("#id").val();
-          var quanity = $("#quanity").val();
-          $.ajax({
-            type: "post",
-            url: BACKEND_DOMAIN + "/customer/shoppingCart",
-            // The key needs to match your method's input parameter (case-sensitive).
-            data: JSON.stringify({
-              itemId: id,
-              quanity: quanity,
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { "api-key": "myKey" },
-            xhrFields: {
-              withCredentials: true,
-            },
-            success: function (data) {
-              console.log(data);
-              console.log(data.id);
-              window.location.href = cart.html;
-            },
-            error: function (errMsg) {
-              alert("error");
-            },
-          });
+            success: function (jqXHR) {
+
+                var parsedJson = jqXHR;
+                // alert(parsedJson.description);
+                // alert(parsedJson.name);
+                $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
+                $("#current").html("<h4>" + jqXHR.price + "$" + "</h4>");
+                $("#name").html("<h1>" + jqXHR.name + "</h1>");
+                $("#brand").html("<h1>" + jqXHR.brand + "</h1>");
+            }
+            ,
+            error: function (jqXHR) {
+                alert(jqXHR.statusText);
+            }
+        }).done(function () {
+            console.log(arguments);
         });
-      });
     </script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="navbar">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar">
         <div class="logo">
-          <img src="../images/logo.png" width="125px" />
+            <img src="../images/logo.png" width="125px"/>
         </div>
         <nav>
-          <ul id="MenuItems">
-            <li><a href="">Home</a></li>
-            <li><a href="">Product</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="">Account</a></li>
-          </ul>
+            <ul id="MenuItems">
+                <li><a href="">Home</a></li>
+                <li><a href="">Product</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">Account</a></li>
+            </ul>
         </nav>
-        <img src="../images/cart.png" width="30px" height="30px" />
-        <img
-          src="../images/menu.png"
-          class="menu-icon"
-          onclick="menutoggle()"
-        />
-      </div>
+        <img src="../images/cart.png" width="30px" height="30px"/>
+        <img src="../images/menu.png" class="menu-icon" onclick="menutoggle()"/>
     </div>
-    <!-- single product details  -->
-    <div class="small-container single-product">
-      <div class="row">
+</div>
+<!-- single product details  -->
+<div class="small-container single-product">
+    <div class="row">
         <!-- we will have 2 columns  -->
-        <div class="col-2" id="test"></div>
-        <div class="col-2">
-          <p id="name">Home / Jacket</p>
-          <h1 id="brand"></h1>
-          <h1 id="current"></h1>
+        <div class="col-2" id="test">
 
-          <select>
-            <option>Select Size</option>
-            <option>XXL</option>
-            <option>XL</option>
-            <option>L</option>
-            <option>M</option>
-            <option>S</option>
-          </select>
-          <input type="number" id="quanity" value="1" />
-          <a href="" class="btn" id="cart-btn">Add To Cart</a>
-          <h3>Product Details<i class="fa fa-indent"></i></h3>
-          <br />
-          <!--<p>
+        </div>
+        <div class="col-2">
+            <p id="name">Home / Jacket</p>
+            <h1 id="brand"></h1>
+            <h1 id="current"></h1>
+
+            <select>
+                <option>Select Size</option>
+                <option>XXL</option>
+                <option>XL</option>
+                <option>L</option>
+                <option>M</option>
+                <option>S</option>
+            </select>
+            <input type="number" value="1"/>
+            <a href="cart.html" class="btn">Add To Cart</a>
+            <h3>Product Details<i class="fa fa-indent"></i></h3>
+            <br/>
+            <!--<p>
               This jacket is a garment for the upper body, usually extending below
               the hips. This jacket typically has sleeves, and fastens in the
               front or slightly on the side.
             </p>-->
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- title  -->
-    <div class="small-container">
-      <div class="row 2">
+<!-- title  -->
+<div class="small-container">
+    <div class="row 2">
         <h2>Realted Products</h2>
-      </div>
     </div>
+</div>
 
-    <!-- products  -->
-    <!--
+<!-- products  -->
+<!--
     <div class="small-container">
       <div class="row">
         <div class="col-4">
@@ -206,62 +171,62 @@
       </div>
     </div>
 -->
-    <!------footer------>
-    <div class="footer">
-      <div class="small-container">
+<!------footer------>
+<div class="footer">
+    <div class="small-container">
         <div class="row">
-          <div class="footer-col-1">
-            <h3>Download our app</h3>
-            <p>Download app for Android and IOS mobile phone</p>
-            <div class="app-logo">
-              <img src="../images/play-store.png" />
-              <img src="../images/app-store.png" />
+            <div class="footer-col-1">
+                <h3>Download our app</h3>
+                <p>Download app for Android and IOS mobile phone</p>
+                <div class="app-logo">
+                    <img src="../images/play-store.png"/>
+                    <img src="../images/app-store.png"/>
+                </div>
             </div>
-          </div>
-          <div class="footer-col-2">
-            <img src="../images/logo-white.png" />
-            <p>Our Purpose is to build a shopping website for SOEN341</p>
-          </div>
-          <div class="footer-col-3">
-            <h3>Useful Links</h3>
-            <ul>
-              <li>Coupons</li>
-              <li>Blog post</li>
-              <li>Return Policy</li>
-              <li>Join affiliate</li>
-            </ul>
-          </div>
-          <div class="footer-col-4">
-            <h3>Follow us</h3>
-            <ul>
-              <li>Facebook</li>
-              <li>Twitter</li>
-              <li>Instagram</li>
-              <li>Youtube</li>
-            </ul>
-          </div>
+            <div class="footer-col-2">
+                <img src="../images/logo-white.png"/>
+                <p>
+                    Our Purpose is to build a shopping website for SOEN341
+                </p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog post</li>
+                    <li>Return Policy</li>
+                    <li>Join affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Follow us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>Youtube</li>
+                </ul>
+            </div>
         </div>
-        <hr />
+        <hr/>
         <p class="copyright">Copyright 2022 - SOEN341 team 13</p>
-      </div>
     </div>
+</div>
 
-    <!--------js for toggle menu---------->
-    <script>
-      var MenuItems = document.getElementById("MenuItems");
+<!--------js for toggle menu---------->
+<script>
+    var MenuItems = document.getElementById("MenuItems");
 
-      MenuItems.style.maxHeight = "0px";
+    MenuItems.style.maxHeight = "0px";
 
-      function menutoggle() {
+    function menutoggle() {
         if (MenuItems.style.maxHeight == "0px") {
-          MenuItems.style.maxHeight = "150px";
+            MenuItems.style.maxHeight = "150px";
         } else {
-          MenuItems.style.maxHeight = "0px";
+            MenuItems.style.maxHeight = "0px";
         }
-      }
-    </script>
-    $("#current").html("
-    <h4>" + jqXHR.price + "</h4>
-    ");
-  </body>
+    }
+</script>
+$("#current").html("<h4>" + jqXHR.price + "</h4>");
+</body>
 </html>
