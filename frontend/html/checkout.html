@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Check Out</title>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
+    <script src="../js/index.js"></script>
+    <script src="../js/checkout.js"></script>
+</head>
+<body class="bg-light">
+<nav class="navbar">
+    <a href="#" class="navbar-brand">CheckOut Page</a>
+</nav>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <img src="../images/checkOut.png" width="90" height="90">
+        <h2 class="heading">Thank you for shopping</h2>
+    </div>
+</div>
+<br>
+<form action="" class="validation" novalidate>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="container">
+                    <h3 class="mb-4">Billing Information</h3>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="firstname" class="form-label">First Name</label>
+                            <input id="firstname" type="text" class="form-control" placeholder="Shuang" required>
+                            <div class="invalid-feedback">Firstname Invalid!</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastname" class="form-label">Last Name</label>
+                            <input id="lastname" type="text" class="form-control" placeholder="Luo" required>
+                            <div class="invalid-feedback">Lastname Invalid!</div>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="address1" class="form-label">Address</label>
+                            <input id="address1" type="text" class="form-control"
+                                   placeholder="Boulevard de Maisonneuve O" required>
+                            <div class="invalid-feedback">Address Invalid!</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="address2" class="form-label">Address 2</label>
+                            <small class="text-muted">(Optional)</small>
+                            <input id="address2" type="text" class="form-control" placeholder="1455">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">City</label>
+                            <input id="city" type="text" class="form-control" placeholder="Montreal" required>
+                            <div class="invalid-feedback">City Invalid!</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state" class="form-label">State</label>
+                            <select id="state" class="form-control" required>
+                                <option value=""> Select</option>
+                                <option value="quebec"> Quebec</option>
+                            </select>
+                            <div class="invalid-feedback">State Invalid!</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="zip" class="form-label">Zip Code</label>
+                            <input id="zip" type="text" class="form-control" placeholder="H3G 1M8" required>
+                            <div class="invalid-feedback">Zip Invalid!</div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input id="sameaddress" type="checkbox" class="form-check-input"
+                                   onclick="enableShipping()"/>
+                            <label class="form-check-label" for="sameaddress">My billing and shipping address are not
+                                the same</label>
+                        </div>
+                    </div>
+                    <br>
+                    <script>
+                        function enableShipping() {
+                            document.getElementById("firstnameInput").disabled = "";
+                            document.getElementById("lastnameInput").disabled = "";
+                            document.getElementById("address1Input").disabled = "";
+                            document.getElementById("address2Input").disabled = "";
+                            document.getElementById("cityInput").disabled = "";
+                            document.getElementById("stateValue").disabled = "";
+                            document.getElementById("zipInput").disabled = "";
+                        }
+                    </script>
+
+                    <h3 id="shippingheader" class="mb-4">Shipping Information</h3>
+                    <div id="shipping">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <input id="firstnameInput" type="text" class="form-control" placeholder="" disabled
+                                       required>
+                                <div class="invalid-feedback">Firstname Invalid!</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input id="lastnameInput" type="text" class="form-control" placeholder="" disabled
+                                       required>
+                                <div class="invalid-feedback">Lastname Invalid!</div>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="address1" class="form-label">Address</label>
+                                <input id="address1Input" type="text" class="form-control" placeholder="" disabled
+                                       required>
+                                <div class="invalid-feedback">Address Invalid!</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="address2" class="form-label">Address 2</label>
+                                <input id="address2Input" type="text" class="form-control" placeholder="" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="city" class="form-label">City</label>
+                                <input id="cityInput" type="text" class="form-control" placeholder="" disabled required>
+                                <div class="invalid-feedback">City Invalid!</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="state" class="form-label">State</label>
+                                <select id="stateValue" class="form-control" disabled required>
+                                    <option value=""> Select</option>
+                                    <option value="quebec"> Quebec</option>
+                                </select>
+                                <div class="invalid-feedback">State Invalid!</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="zip" class="form-label">Zip Code</label>
+                                <input id="zipInput" type="text" class="form-control" placeholder="" disabled required>
+                                <div class="invalid-feedback">Zip Invalid!</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <hr class="my-5">
+
+                    <h3 class="mb-4">Payment Information</h3>
+                    <h5>Accepted Payment Methods</h6>
+                        <div class="methodInfomation">
+                            <img src="../images/wechat.png" width="80px">
+                            <img src="../images/visa.png" width="80px">
+                            <img src="../images/mastercard.png" width="80px">
+                            <img src="../images/paypal.jpg" width="80px">
+                        </div>
+                        <br>
+                        <div class="form-check">
+                            <input id="wechat" name="payment" type="radio" class="form-check-input" required checked>
+                            <label for="card">Wechat</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="card" name="payment" type="radio" class="form-check-input" required>
+                            <label for="card">Credit/Debit Card</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="paypal" name="payment" type="radio" class="form-check-input" required>
+                            <label for="paypal">Paypal</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="cashondelivery" name="payment" type="radio" class="form-check-input" required>
+                            <label for="cashondelivery">Cash on delivery</label>
+                        </div>
+
+                        <div class="row my-3 gy-3">
+                            <div class="col-md-8">
+                                <label for="paymentname" class="form-label">Full Name</label>
+                                <small class="text-muted">(name on your card)</small>
+                                <input id="paymentname" type="text" class="form-control" placeholder="Alec" required>
+                                <div class="invalid-feedback"> Credit Card Name Invalid!</div>
+                                <div class="row my-3 gy-3">
+                                    <div class="col-md-12">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input id="email" type="text" class="form-control"
+                                               placeholder="shuang@email.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="paymentcard" class="form-label">Credit Card Number</label>
+                                <small class="text-muted">(16-digit)</small>
+                                <input id="paymentcard" type="text" class="form-control"
+                                       placeholder="xxxx xxxx xxxx xxxx" required>
+                                <div class="invalid-feedback">Credit Card Number Invalid!</div>
+
+                                <div class="row my-3 gy-3">
+                                    <div class="col-md-8">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input id="cvv" type="text" class="form-control" placeholder="123" required>
+                                        <div class="invalid-feedback"> CVV Invalid!</div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label for="expiration" class="form-label">Expiration</label>
+                                        <input id="expiration" type="text" class="form-control" placeholder="(MM/YY)"
+                                               required>
+                                        <div class="invalid-feedback"> Expiration Invalid!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Save Information</button>
+            </div>
+            <div class="col-4">
+                <div class="row-4">
+                    <h5 class="cart">
+                        <button type="back" class="btn-lg btn-block">Back to Shopping Cart</button>
+                        <span class="text">Your Order</span>
+                    </h5>
+                    <ul class="list-group">
+
+                        <li class="payment">
+                            <div>
+                                <h5>Total</h5>
+                            </div>
+                            <span class="">$9999</span>
+                        </li>
+                    </ul>
+
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Place Order</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</form>
+
+
+</body>
+</html>
+<script type="text/javascript" src="../js/getUrlParam.js"></script>
+<script src="../js/jquery-3.6.0.js"></script>
+<script>
+    $.ajax({
+        type: 'GET',
+        url: url,
+        dataType: 'json',
+
+        success: function (jqXHR) {
+            var parsedJson = jqXHR;
+        },
+
+        error: function (jqXHR) {
+            alert(jqXHR.statusText);
+        }
+    }).done(function () {
+        console.log(arguments);
+    });
+</script>
+

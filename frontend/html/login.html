@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../css/signup.css">
+    <script type="text/javascript" src="../js/domain.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
+    <script src="../js/jquery.cookie.min.js"></script>
+    <script src="../js/login.js"></script>
+    
+</head>
+<body>
+
+<img src="../images/loader.gif" class="loader">
+
+<div class="alert-box">
+    <img src="../images/error.png" class="alert-img" alt="">
+    <p class="alert-msg">Error message</p>
+</div>
+
+<div class="container">
+    <img src="../images/logo.png" class="logo">
+    <div>
+        <input type="email" autocomplete="off" id="email" placeholder="email">
+        <input type="password" autocomplete="off" id="password" placeholder="password">
+        <input type="checkbox" class="checkbox" id="remember-me">
+        <label for="remember-me">Remember me</label>
+        <button class="submit-btn" id="login-btn">Login</button>
+    </div>
+    <a href="signup.html" class="link">Don't have an account? Create one</a>
+</div>
+</body>
+</html>
