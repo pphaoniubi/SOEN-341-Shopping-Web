@@ -10,46 +10,58 @@
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
     <script>
-        $(function () {
-            $('#login-btn').on('click', function () {
-                var email = $('#email').val();
-                var password = $('#password').val();
 
-                if (email == "" || password == "") {
-                    alert("Please don't leave any blank on email or password");
-                } else {
-
-                    $.ajax({
-                        type: "post",
-                        url: BACKEND_DOMAIN + "/account/login",
-                        // The key needs to match your method's input parameter (case-sensitive).
-                        data: JSON.stringify({
-                            "email": email,
-                            "password": password
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        headers: {'api-key': 'myKey'},
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            console.log(data.id);
-                            jump();
-                        },
-                        error: function (errMsg) {
-                            alert('error');
+        function login() {
+            let email = $("#email").val();
+            let password = $("#password").val();
+            let rememberme = $("#rememberme").is(':checked');
+            if (email.length == 0) {
+                window.alert("Account should not be empty.");
+                $("#email").focus();
+            } else if (password == 0) {
+                window.alert("Password should not be empty.");
+                $("#password").focus();
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: BACKEND_DOMAIN + "/account/login",
+                    data: JSON.stringify({
+                        "email": email,
+                        "password": password
+                    }),
+                    crossDomain: true,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        let account = {
+                            email: email,
+                            password: password,
+                            rememberme: rememberme
                         }
-                    });
-                }
+                        if (rememberme) {
+                            remember(account);
+                        }
+                        sessionStorage.setItem("ac", JSON.stringify(account));
+                        window.location.replace("index.html");
+                    },
+                    error: function (errMsg) {
+                        alert('error');
+                    }
+                });
+            }
+        }
+
+        function remember(account) {
+            $.cookie("ac", JSON.stringify(account), {
+                expires: 10,
+            })
+        }
+
+        $(function () {
+            $('#loginBtn').on('click', function () {
+                login();
             })
         });
-
-        function jump() {
-            var url_1 = "index.html";
-            window.location.href = url_1;
-        }
     </script>
 </head>
 <body>
@@ -62,13 +74,13 @@
 </div>
 
 <div class="container">
-    <img src="../images/logo.png" class="logo">
+    <img src="../images/logo.png" width="125px">
     <div>
         <input type="email" autocomplete="off" id="email" placeholder="email">
         <input type="password" autocomplete="off" id="password" placeholder="password">
-        <input type="checkbox" checked class="checkbox" id="remember-me">
-        <label for="remember-me">Remember me</label>
-        <button class="submit-btn" id="login-btn">Login</button>
+        <input type="checkbox" checked class="checkbox" id="rememberme">
+        <label for="rememberme">Remember me</label>
+        <button class="submit-btn" id="loginBtn">Login</button>
     </div>
     <a href="signup.html" class="link">Don't have an account? Create one</a>
 </div>

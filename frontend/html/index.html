@@ -15,6 +15,8 @@
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
+    <!--<script src="../js/cors.js"></script>
+    <script>$.enableCORS();</script>-->
     <script>
         $(function() {
             $.ajax({
@@ -34,8 +36,8 @@
                             + "<h4>" + content[j].name + "</h4>"
                             + "<h4>" + content[j].brand + "</h4>"
                             + "<p>" + content[j].price + "$" + "</p>"
-                            + "<a onclick='checkDetail(" + content[j].id + ")'>check detail</a>&nbsp;"
-                            + "<a onclick='addToCart(" + content[j].id + ")'>add to cart</a></div>"
+                            + "<btn onclick='checkDetail(" + content[j].id + ")'>check detail</btn>&nbsp;"
+                            + "<a href='javascript: addToCart(" + content[j].id + ")' className='btn'>Add To Cart</a></div>"
                         );
                     }
                 },
@@ -52,7 +54,32 @@
         }
 
         function addToCart(id) {
-
+            let ac = $.cookie("ac");
+            var payload = [{
+                "itemId": id,
+                "quantity": 1
+            }];
+            if (ac != undefined && ac.length > 0) {
+                $.ajax({
+                    type: "post",
+                    url: BACKEND_DOMAIN + "/customer/shoppingCart",
+                    data: JSON.stringify(payload),
+                    crossDomain: true,
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    xhrFields: {withCredentials: true},
+                    headers: {"accept": "application/json"},
+                    success: function (data) {
+                        alert("Item is added into shopping cart!");
+                        window.location.replace("index.html");
+                    },
+                    error: function (errMsg) {
+                        alert('error');
+                    }
+                });
+            } else {
+                window.location.href = "login.html";
+            }
         }
     </script>
 </head>
