@@ -1,6 +1,17 @@
-console.log('Hello world')
+
 var removecarteButtoms=document.getElementsByClassName("btn-rm")
 console.log(removecarteButtoms)
+
+$(window).on('load', function() {
+    let user = sessionStorage.getItem("op");
+    console.log(user);
+    if(user != null){
+        //user is logged in
+
+    }else{
+            login();
+    }
+})
 
 for(var i=0;i<removecarteButtoms.length;i++)
 {
