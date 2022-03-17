@@ -44,11 +44,13 @@ function updateCartTotal(){
       td.innerHTML ='$'+total;
       console.log(td);
 
+   
+
 }
 
 function updateQuantity()
 {
-   var quantity=getElementsByClassName('cart-quantity-input')
+   var quantity=document.getElementsByClassName('cart-quantity-input')
    for(var i=0;i++;i<quantity.length)
    {
        var input=quantity[i].value;
