@@ -9,49 +9,8 @@
     <script type="text/javascript" src="../js/domain.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
-    <script>
-        $(function () {
-            $('#login-btn').on('click', function () {
-                var email = $('#email').val();
-                var password = $('#password').val();
-
-                if (email == "" || password == "") {
-                    alert("Please don't leave any blank on email or password");
-                } else {
-
-                    $.ajax({
-                        type: "post",
-                        url: "https://9ce9-147-124-72-174.ngrok.io/account/login",
-                        // The key needs to match your method's input parameter (case-sensitive).
-                        data: JSON.stringify({
-                            "email": email,
-                            "password": password
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        headers: {'api-key': 'myKey'},
-        //                xhrFields: {
-          //                  withCredentials: true
-            //            },
-                        
-                        success: function (data) {
-                            console.log(data);
-                            console.log(data.id);
-                            jump();
-                        },
-                        error: function (errMsg) {
-                            alert('error');
-                        }
-                    });
-                }
-            })
-        });
-
-        function jump() {
-            var url_1 = "index.html";
-            window.location.href = url_1;
-        }
-    </script>
+    <script src="../js/login.js"></script>
+    
 </head>
 <body>
 
@@ -67,7 +26,7 @@
     <div>
         <input type="email" autocomplete="off" id="email" placeholder="email">
         <input type="password" autocomplete="off" id="password" placeholder="password">
-        <input type="checkbox" checked class="checkbox" id="remember-me">
+        <input type="checkbox" class="checkbox" id="remember-me">
         <label for="remember-me">Remember me</label>
         <button class="submit-btn" id="login-btn">Login</button>
     </div>

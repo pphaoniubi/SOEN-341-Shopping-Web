@@ -15,8 +15,13 @@
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
+    <script src="../js/index.js"></script>
     <script>
         $(function() {
+            $('.login-logout-popup').hide(200);
+            $('#user-image').on('click', function() {
+            $('.login-logout-popup').toggle();
+})
             $.ajax({
                 type: "GET",
                 crossDomain: true,
@@ -72,6 +77,13 @@
                 <li><a href="">Account</a></li>
             </ul>
         </nav>
+        <a>
+            <img src="../images/user.png" id="user-image" alt="">
+            <div class="login-logout-popup">
+                <p class="account-info">log in as, name</p>
+                <button class="log-btn" id="log-btn" onclick="logout()">Log out</button>
+            </div>
+        </a>
         <form action="cart.html">
             <button type="submit">
                 <img src="../images/cart.png" width="30px" height="30px">
