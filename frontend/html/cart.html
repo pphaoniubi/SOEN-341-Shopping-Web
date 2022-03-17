@@ -20,27 +20,55 @@
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
     <script src="../js/cart.js" async></script>
-
+    <script src="../js/domain.js"></script>
     <script src="../js/index.js"></script>
 
+    <script>
+      $(function () {
+        $(".login-logout-popup").hide(200);
+        $("#user-image").on("click", function () {
+          $(".login-logout-popup").toggle();
+        });
+        $.ajax({
+          type: "GET",
+          crossDomain: true,
+          dataType: "json",
+          url: BACKEND_DOMAIN + "/customer/shoppingCart",
+          success: function (data) {
+            var content = data.content;
+            var row;
+            for (var j = 0; j < content.length; j++) {
+              row.append(
+                "<div><img src='" +
+                  content[j].thumbnail +
+                  "' width='200' height='200'/>" +
+                  "<h4>" +
+                  content[j].name +
+                  "</h4>" +
+                  "<h4>" +
+                  content[j].brand +
+                  "</h4>" +
+                  "<p>" +
+                  content[j].price +
+                  "$" +
+                  "</p>"
+              );
+            }
+          },
+          error: function (jqXHR) {
+            // alert(jqXHR.statusText);
+          },
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="navbar">
-
         <div class="logo">
           <img src="../images/logo.png" width="125px" />
         </div>
         <nav>
-
-            <ul id="MenuItems">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="">Product</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Account</a></li>
-            </ul>
-
           <ul id="MenuItems">
             <li><a href="index.html">Home</a></li>
             <li><a href="">Product</a></li>
@@ -48,7 +76,6 @@
             <li><a href="">Contact</a></li>
             <li><a href="">Account</a></li>
           </ul>
-
         </nav>
         <img src="../images/cart.png" width="30px" height="30px" />
         <img
@@ -60,6 +87,7 @@
     </div>
 
     <!-- cart items details  -->
+    <div class="row" id="carts"></div>
     <div class="small-container cart-page">
       <table>
         <!-- inside table row  -->

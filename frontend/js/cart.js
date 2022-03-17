@@ -1,7 +1,7 @@
 
 var removecarteButtoms=document.getElementsByClassName("btn-rm")
 console.log(removecarteButtoms)
-
+/*
 $(window).on('load', function() {
     let user = sessionStorage.getItem("op");
     console.log(user);
@@ -12,7 +12,7 @@ $(window).on('load', function() {
             login();
     }
 })
-
+*/
 for(var i=0;i<removecarteButtoms.length;i++)
 {
     var button=removecarteButtoms[i]
@@ -64,7 +64,7 @@ function updateQuantity()
    var quantity=document.getElementsByClassName('cart-quantity-input')
    for(var i=0;i++;i<quantity.length)
    {
-       var input=quantity[i].value;
+       var input=quantity[i];
        console.log(input);
        input.addEventListener('change',quantityChanged)
    }
