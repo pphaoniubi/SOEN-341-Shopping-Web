@@ -43,7 +43,38 @@ function updateCartTotal(){
     }
     total = Math.round(total * 100) / 100
     console.log(total)
-    document.getElementsByClassName('total-price')[0].innerText = '$' + total
+   // String balance=document.getElementsByClassName('total-price')[0].id;
+  
+
+   // document.getElementsByClassName('total-price')[0].innerText='Total Balance:'+' '+'$'+total;
+   var totalPrice=document.getElementsByClassName('total-price')[0]
+   // var table = totalPrice.getElementById("table")
+      tr = totalPrice.getElementsByTagName('tr')[0]
+      td = tr.getElementsByTagName('td')[1]
+
+      td.innerHTML ='$'+total;
+      console.log(td);
+
+}
+
+function updateQuantity()
+{
+   var quantity=getElementsByClassName('cart-quantity-input')
+   for(var i=0;i++;i<quantity.length)
+   {
+       var input=quantity[i].value;
+       console.log(input);
+       input.addEventListener('change',quantityChanged)
+   }
+
+}
+
+function quantityChanged(event)
+{
+var input=event.target;
+if(isNaN(input)||input<0)
+ {input.value=1;}
+ updateCartTotal()
 
 }
 
