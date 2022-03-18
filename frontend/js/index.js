@@ -1,31 +1,62 @@
-var $userBtn = $('#user-image');
-var $logBtn = $('#log-btn');
+// api url
+const api_url =
+    "https://8cde-206-176-145-172.ngrok.io/item/byBrand?brand=?";
 
-
-$(window).on('load', function() {
-    let user = sessionStorage.getItem("op");
-    console.log(user);
-    if(user != null){
-        //user is logged in
-        $(".account-info").html(`Welcome! ${JSON.parse(user).email}`);
-        $("#log-btn").on('click', function() {
-            logout();
-        })
-    }else{
-        $(".account-info").html(`login in place order`);
-        $("#log-btn").html('log in')
-        $("#log-btn").on('click', function() {
-            login();
-        })
+// Defining async function
+async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    console.log(data);
+    if (response) {
+        hideloader();
     }
-})
-function logout() {
-
-    sessionStorage.clear;
-    sessionStorage.setItem("toLogin", "1")
-
-    window.location.href = "login.html";
+    show(data);
 }
-function login(){
-    window.location.href = "login.html";
+// Calling that async function
+getapi(api_url);
+
+// Function to hide the loader
+function hideloader() {
+    document.getElementById('loading').style.display = 'none';
+}
+// Function to define innerHTML for HTML table
+function show(data) {
+    let tab =
+        `<tr>
+        <th>Name</th>
+        <th>Office</th>
+        <th>Position</th>
+        <th>Salary</th>
+        </tr>`;
+    
+    // Loop to access all rows
+    for (let r of data.list) {
+        tab += `<tr>
+    <td>${r.name} </td>
+    <td>${r.office}</td>
+    <td>${r.position}</td>
+    <td>${r.salary}</td>        
+</tr>`;
+    }
+    // Setting innerHTML as tab variable
+    document.getElementById("employees").innerHTML = tab;
+}
+function byNameCheckbox(obj){
+    if($(obj).is(":checked")){
+        document.getElementById("searchTextBox").name
+        console.log("Yes checked"); //when checked
+      }else{
+        console.log("Not checked"); //when not checked
+      }
+}
+function byBrandCheckbox(obj){
+    if($(obj).is(":checked")){
+        console.log("Yes checked"); //when checked
+      }else{
+        console.log("Not checked"); //when not checked
+      }
 }
