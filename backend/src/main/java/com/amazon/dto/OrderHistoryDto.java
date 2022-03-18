@@ -1,17 +1,14 @@
 package com.amazon.dto;
 
 import com.amazon.constant.OrderHistoryStatus;
-import com.amazon.entity.Account;
-import com.amazon.entity.Address;
-import com.amazon.entity.Payment;
 
 public class OrderHistoryDto {
 
     private int id;
-    private Account account;
+    private AccountDto account;
     private double totalAmount;
-    private Payment payment;
-    private Address address;
+    private PaymentDto payment;
+    private AddressDto address;
     private OrderHistoryStatus status;
 
     public int getId() {
@@ -22,11 +19,11 @@ public class OrderHistoryDto {
         this.id = id;
     }
 
-    public Account getAccount() {
+    public AccountDto getAccount() {
         return account;
     }
 
-    public void setAccount(Account account) {
+    public void setAccount(AccountDto account) {
         this.account = account;
     }
 
@@ -38,19 +35,19 @@ public class OrderHistoryDto {
         this.totalAmount = totalAmount;
     }
 
-    public Payment getPayment() {
+    public PaymentDto getPayment() {
         return payment;
     }
 
-    public void setPayment(Payment payment) {
+    public void setPayment(PaymentDto payment) {
         this.payment = payment;
     }
 
-    public Address getAddress() {
+    public AddressDto getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDto address) {
         this.address = address;
     }
 

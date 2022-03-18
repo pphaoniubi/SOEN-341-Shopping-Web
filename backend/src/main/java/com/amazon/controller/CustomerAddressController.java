@@ -42,7 +42,7 @@ public class CustomerAddressController {
     @PutMapping("/{addressId}")
     @Transactional
     public AddressDto updateAddress(@PathVariable int addressId,
-                                          @RequestBody AddressChangeDto addressChangeDto) {
+                                    @RequestBody AddressChangeDto addressChangeDto) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
         return AddressMapper.INSTANCE.map(addressService.update(addressId, addressChangeDto, account));
