@@ -5,7 +5,6 @@ import com.amazon.entity.Role;
 import com.amazon.dto.RegisterDto;
 import com.amazon.repository.AccountRepository;
 import org.apache.commons.validator.routines.EmailValidator;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

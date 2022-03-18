@@ -92,8 +92,9 @@ public class CustomerShoppingService {
         ShoppingCart shoppingCart = findShoppingCartByAccountId(account.getId());
         List<ShoppingItem> shoppingItems;
         if (Objects.isNull(shoppingCart)) {
-            ShoppingCart newShoppingCart = new ShoppingCart(account, totalAmount);
-            saveShoppingCart(newShoppingCart);
+            shoppingCart = new ShoppingCart(account, totalAmount);
+            saveShoppingCart(shoppingCart);
+            final ShoppingCart newShoppingCart = shoppingCart;
             shoppingItems = itemIdQuantityMap.entrySet().stream()
                     .filter(entry -> Objects.nonNull(itemMap.get(entry.getKey())))
                     .map(entry -> new ShoppingItem(itemMap.get(entry.getKey()), entry.getValue(),
@@ -104,8 +105,8 @@ public class CustomerShoppingService {
             saveShoppingCart(shoppingCart);
             shoppingItems = findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
             Map<Integer, ShoppingItem> shoppingItemMap = shoppingItems.stream()
-                    .collect(Collectors.toMap(shoppingItem -> shoppingItem.getId(), shoppingItem -> shoppingItem));
-            List<Integer> shoppingItemIds = shoppingItems.stream().map(ShoppingItem::getId).collect(Collectors.toList());
+                    .collect(Collectors.toMap(shoppingItem -> shoppingItem.getItem().getId(), shoppingItem -> shoppingItem));
+            List<Integer> shoppingItemIds = shoppingItems.stream().map(shoppingItem -> shoppingItem.getItem().getId()).collect(Collectors.toList());
             for (Item item : items) {
                 if (shoppingItemIds.contains(item.getId())) {
                     ShoppingItem shoppingItem = shoppingItemMap.get(item.getId());
