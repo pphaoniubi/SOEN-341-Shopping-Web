@@ -14,16 +14,24 @@
     <script type="text/javascript" src="../js/domain.js"></script>
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
-    <script src="../js/jquery.cookie.min.js"></script>
+<!--    <script src="../js/jquery.cookie.min.js"></script>-->
     <!--<script src="../js/cors.js"></script>
     <script>$.enableCORS();</script>-->
     <script>
         $(function() {
-            $.ajax({
-                type: "GET",
+            $.ajaxSetup({
+                xhrFields: {
+                    withCredentials: true
+                }
+            });
+
+            $.ajax(BACKEND_DOMAIN + '/item?page=0&size=20&sort=price,desc', {
+                method: "GET",
+                xhrFields: {
+                    withCredentials: true
+                },
                 crossDomain: true,
                 dataType: "json",
-                url: BACKEND_DOMAIN + '/item?page=0&size=20&sort=price,desc',
                 success: function (data) {
                     var content = data.content;
                     var row;
@@ -54,23 +62,20 @@
         }
 
         function addToCart(id) {
-            let ac = $.cookie("ac");
+            let ac = sessionStorage.getItem("ac");
             var payload = [{
                 "itemId": id,
                 "quantity": 1
             }];
             if (ac != undefined && ac.length > 0) {
-                $.ajax({
-                    type: "post",
-                    url: BACKEND_DOMAIN + "/customer/shoppingCart",
+                $.ajax(BACKEND_DOMAIN + "/customer/shoppingCart", {
+                    method: 'POST',
                     data: JSON.stringify(payload),
-                    crossDomain: true,
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    xhrFields: {withCredentials: true},
                     headers: {"accept": "application/json"},
                     success: function (data) {
-                        alert("Item is added into shopping cart!");
+                        alert("Item is added into shopping cart! " + JSON.stringify(data));
                         window.location.replace("index.html");
                     },
                     error: function (errMsg) {

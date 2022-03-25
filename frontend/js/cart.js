@@ -1,3 +1,4 @@
+/*
 console.log('Hello world')
 var removecarteButtoms=document.getElementsByClassName("btn-rm")
 console.log(removecarteButtoms)
@@ -36,3 +37,4 @@ function updateCartTotal(){
 
 }
 
+*/

@@ -1,5 +1,6 @@
 $(function() {
-    let ac = $.cookie("ac");
+    // let ac = $.cookie("ac");
+    let ac = sessionStorage.getItem("ac");
     if (ac != undefined && ac.length > 0) {
         let account = JSON.parse(ac);
         $("#email").val(account.email);

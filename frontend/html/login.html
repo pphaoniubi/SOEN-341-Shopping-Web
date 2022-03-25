@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="ccs/signup.css">
     <script type="text/javascript" src="../js/domain.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
-    <script src="../js/jquery.cookie.min.js"></script>
+<!--    <script src="../js/jquery.cookie.min.js"></script>-->
     <script>
 
         function login() {
@@ -22,25 +22,23 @@
                 window.alert("Password should not be empty.");
                 $("#password").focus();
             } else {
-                $.ajax({
-                    type: "post",
-                    url: BACKEND_DOMAIN + "/account/login",
+                $.ajax(BACKEND_DOMAIN + "/account/login", {
+                    method: 'POST',
                     data: JSON.stringify({
                         "email": email,
                         "password": password
                     }),
-                    crossDomain: true,
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    success: function (data) {
+                    success: function (data, textStatus, request){
                         let account = {
                             email: email,
                             password: password,
                             rememberme: rememberme
                         }
-                        if (rememberme) {
-                            remember(account);
-                        }
+                        alert(document.cookie);
+                        alert("set-cookie= " + request.getResponseHeader('set-cookie'));
+                        alert("Webstorm-cb99ebc9= " + request.getResponseHeader('Webstorm-cb99ebc9'));
                         sessionStorage.setItem("ac", JSON.stringify(account));
                         window.location.replace("index.html");
                     },
@@ -51,11 +49,11 @@
             }
         }
 
-        function remember(account) {
+        /*function remember(account) {
             $.cookie("ac", JSON.stringify(account), {
                 expires: 10,
             })
-        }
+        }*/
 
         $(function () {
             $('#loginBtn').on('click', function () {
