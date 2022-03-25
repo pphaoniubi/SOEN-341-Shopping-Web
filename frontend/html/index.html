@@ -14,7 +14,7 @@
     <script type="text/javascript" src="../js/domain.js"></script>
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
-<!--    <script src="../js/jquery.cookie.min.js"></script>-->
+    <script src="../js/jquery.cookie.min.js"></script>
     <!--<script src="../js/cors.js"></script>
     <script>$.enableCORS();</script>-->
     <script>
@@ -71,9 +71,10 @@
                 $.ajax(BACKEND_DOMAIN + "/customer/shoppingCart", {
                     method: 'POST',
                     data: JSON.stringify(payload),
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
-                    headers: {"accept": "application/json"},
                     success: function (data) {
                         alert("Item is added into shopping cart! " + JSON.stringify(data));
                         window.location.replace("index.html");

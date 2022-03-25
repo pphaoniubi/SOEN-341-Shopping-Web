@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="ccs/signup.css">
     <script type="text/javascript" src="../js/domain.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
-<!--    <script src="../js/jquery.cookie.min.js"></script>-->
+    <script src="../js/jquery.cookie.min.js"></script>
     <script>
 
         function login() {
@@ -28,6 +28,8 @@
                         "email": email,
                         "password": password
                     }),
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (data, textStatus, request){
