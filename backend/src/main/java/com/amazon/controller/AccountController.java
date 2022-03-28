@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.io.IOException;
 
 @RestController
@@ -28,7 +27,7 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public AccountDto login(@Valid @RequestBody LoginDto loginDto,
+    public AccountDto login(@RequestBody LoginDto loginDto,
                             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Account account;
