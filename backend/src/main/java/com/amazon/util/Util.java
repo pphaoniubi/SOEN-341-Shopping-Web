@@ -6,10 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class Util {
 
-    public static void main(String[] args) {
-        passwordGenerator("123456");
-    }
-
     public static void passwordGenerator(String plainTextPassword) {
         System.out.println(new BCryptPasswordEncoder().encode(plainTextPassword));
     }

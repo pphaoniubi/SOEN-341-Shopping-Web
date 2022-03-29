@@ -39,7 +39,7 @@ public class PaymentService {
         paymentRepository.delete(checkPayment(paymentId, account));
     }
 
-    private Payment checkPayment(int paymentId, Account account) {
+    public Payment checkPayment(int paymentId, Account account) {
         Payment payment = paymentRepository.findByAccountAndId(account, paymentId);
         if (Objects.isNull(payment)) {
             throw new IllegalArgumentException("There's no such payment method for this customer.");

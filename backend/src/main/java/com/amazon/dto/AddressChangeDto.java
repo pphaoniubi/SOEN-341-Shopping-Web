@@ -20,4 +20,11 @@ public class AddressChangeDto {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    public AddressChangeDto() {}
+
+    public AddressChangeDto(String content, Boolean enabled) {
+        this.content = content;
+        this.enabled = enabled;
+    }
 }

@@ -31,4 +31,12 @@ public class PaymentChangeDto {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    public PaymentChangeDto() {}
+
+    public PaymentChangeDto(PaymentType paymentType, String number, Boolean enabled) {
+        this.paymentType = paymentType;
+        this.number = number;
+        this.enabled = enabled;
+    }
 }

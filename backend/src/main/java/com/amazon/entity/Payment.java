@@ -86,4 +86,20 @@ public class Payment {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Payment payment = (Payment) o;
+
+        return id == payment.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return String.valueOf(id).hashCode();
+    }
 }
