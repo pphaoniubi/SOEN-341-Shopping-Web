@@ -38,10 +38,10 @@ public class AddressService {
         addressRepository.delete(checkAddress(addressId, account));
     }
 
-    private Address checkAddress(int addressId, Account account) {
+    public Address checkAddress(int addressId, Account account) {
         Address address = addressRepository.findByAccountAndId(account, addressId);
         if (Objects.isNull(address)) {
-            throw new IllegalArgumentException("There's no such address method for this customer.");
+            throw new IllegalArgumentException("There's no such address for this customer.");
         }
         return address;
     }
