@@ -20,7 +20,7 @@ public class PaymentService {
 
     public Payment create(PaymentChangeDto paymentChangeDto, Account account) {
         Payment payment = new Payment(account, paymentChangeDto.getPaymentType(), paymentChangeDto.getNumber(), true);
-        return null; //paymentRepository.save(payment);
+        return paymentRepository.save(payment);
     }
 
     public Payment update(int paymentId, PaymentChangeDto paymentChangeDto, Account account) {
