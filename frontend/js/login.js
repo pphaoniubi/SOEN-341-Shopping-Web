@@ -1,7 +1,7 @@
 $(function() {
-    let op = $.cookie('op');
-    if(op != undefined && op.length > 0){
-        let operator = JSON.parse(op);
+    let ac = $.cookie('ac');
+    if(ac != undefined && ac.length > 0){
+        let operator = JSON.parse(ac);
         $('#email').val(operator.email);
         $('#password').val(operator.password);
         if(sessionStorage.getItem("toLogin") != "1"){
@@ -45,10 +45,12 @@ function login() {
         if(remember){
             rememberuser(user);
         }
-        sessionStorage.setItem("op", JSON.stringify(user));
+        
+        sessionStorage.setItem("ac", JSON.stringify(user));
         $.ajax({
             type: "post",
-            url: "https://9ce9-147-124-72-174.ngrok.io/account/login",
+            //url: BACKEND_DOMAIN + '/account/login',
+           url: BACKEND_DOMAIN +"/account/login",
             // The key needs to match your method's input parameter (case-sensitive).
             data: JSON.stringify(user),
             contentType: "application/json; charset=utf-8",
@@ -70,7 +72,7 @@ function login() {
 }
 
 function rememberuser(user) {
-    $.cookie('op', JSON.stringify(user), {
+    $.cookie('ac', JSON.stringify(user), {
         expires: 7
     });
 }

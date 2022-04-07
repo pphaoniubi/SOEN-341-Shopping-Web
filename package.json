@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bootstrap": "^3.4.1",
     "js-cookie": "^3.0.1"
   }
 }

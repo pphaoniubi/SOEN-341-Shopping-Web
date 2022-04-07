@@ -30,36 +30,68 @@
           $(".login-logout-popup").toggle();
         });
         $.ajax({
-          type: "GET",
+          method: "GET",
+          xhrFields: {
+                    withCredentials: true
+                },
           crossDomain: true,
           dataType: "json",
           url: BACKEND_DOMAIN + "/customer/shoppingCart",
           success: function (data) {
-            var content = data.content;
+           // alert("Item in shopping cart: " + JSON.stringify(data));
+           
+          var content = data.shoppingItemDtos;
+            //alert("Item in shopping cart: " + JSON.stringify(content[1]));
+            console.log(data);
+            console.log(content[0]);
             var row;
             for (var j = 0; j < content.length; j++) {
+          row = $("<div class='col-4'></div>");
+          $("#products").append(row);
               row.append(
-                "<div><img src='" +
-                  content[j].thumbnail +
-                  "' width='200' height='200'/>" +
-                  "<h4>" +
-                  content[j].name +
-                  "</h4>" +
-                  "<h4>" +
-                  content[j].brand +
-                  "</h4>" +
-                  "<p>" +
-                  content[j].price +
-                  "$" +
-                  "</p>"
+                "<div><img src='" + content[j].itemDetailDto.thumbnail + "' width='200px' height='200px'/>" +
+                  "<h4>" + content[j].itemDetailDto.name +"</h4>" +
+                  "<h4>" + content[j].itemDetailDto.brand + "</h4>" +
+                  "<p>" + content[j].itemDetailDto.price + "$" + "</p>" +
+                  "<a href='javascript: deleteFromCart(" + content[j].itemDetailDto.id + ")' className='btn'>remove</a></div>"
               );
             }
+            row.append( "<h4>" + "total amount: " + data.shoppingCartDto.totalAmount + "$" + "</h4>");
+            "<a href='javascript: checkOut(" + data.shoppingCartDto.totalAmount + ")' className='btn'>remove</a></div>"
           },
           error: function (jqXHR) {
-            // alert(jqXHR.statusText);
+             alert(jqXHR.statusText);
           },
         });
       });
+      function  deleteFromCart(id) {
+        let ac = sessionStorage.getItem("ac");
+        console.log(id);
+        var payload = [id];
+        //var payload = new List <int> () {id};
+            if (ac != undefined && ac.length > 0) {
+        $.ajax(BACKEND_DOMAIN + "/customer/shoppingCart/4/shoppingItem", {
+                    method: 'DELETE',
+                    data: JSON.stringify(payload),
+                    //data: id,
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        alert("Item is deleted from shopping cart! " + JSON.stringify(data));
+                    },
+                    error: function (errMsg) {
+                        alert('error');
+                    }
+                });
+              } else {
+                window.location.href = "login.html";
+            }
+      }
+      function checkOut(amount) {
+        window.location.href = "checkout.html?amount=" + amount;
+      }
     </script>
   </head>
   <body>
@@ -98,23 +130,23 @@
           <th>Quantity</th>
           <th>Subtotal</th>
         </tr>
-        <!-- This is where we insert table data, display content that we want to insert in table  -->
-        <div class="cart-items">
+        <!-- This is where we insert table data, display content that we want to insert in table --> 
+        <div class="cart-items" id="products">
           <tr>
             <td>
               <div class="cart-info">
-                <!-- This is where we add images  -->
+                <!-- This is where we add images  
                 <img
                   src="images/pexels-hassan-ouajbir-887898.jpg"
                   width="150px"
                   height="150px"
-                />
-                <!--This is where images need to match with description  -->
+                />-->
+                <!--This is where images need to match with description  
                 <div class="item-info">
                   <p>Leather Jacket Women</p>
                   <span class="cart-price">$69.99</span>
-                  <br />
-                  <!-- Using br to go to the next line  -->
+                  <br />-->
+                  <!-- Using br to go to the next line  
 
                   <button class="btn btn-rm" type="button">Remove</button>
                 </div>
@@ -125,25 +157,25 @@
             </td>
             <td>$69.99</td>
           </tr>
-        </div>
+        </div>-->
 
-        <!--This is where the second table needs to be added  -->
+        <!--This is where the second table needs to be added  
         <div class="cart-items">
           <tr>
             <td>
-              <div class="cart-info">
-                <!-- This is where we add images  -->
+              <div class="cart-info">-->
+                <!-- This is where we add images  
                 <img
                   src="images/pexels-godisable-jacob-818992.jpg"
                   width="150px"
                   height="150px"
-                />
-                <!--This is where images need to match with description  -->
+                />-->
+                <!--This is where images need to match with description  
                 <div class="item-info">
                   <p>Leather Jacket Women</p>
                   <span class="cart-price">$69.99</span>
-                  <br />
-                  <!-- Using br to go to the next line  -->
+                  <br />-->
+                  <!-- Using br to go to the next line  
 
                   <button class="btn btn-rm" type="button">Remove</button>
                 </div>
@@ -154,27 +186,27 @@
             </td>
             <td>$69.99</td>
           </tr>
-        </div>
+        </div>-->
 
-        <!--This is where the third procuct needs to be added  -->
+        <!--This is where the third procuct needs to be added  
 
         <div class="cart-items">
           <tr>
             <td>
-              <div class="cart-info">
-                <!-- This is where we add images  -->
+              <div class="cart-info">-->
+                <!-- This is where we add images  
                 <img
                   src="images/pexels-cottonbro-6764726.jpg"
                   width="150px"
                   height="150px"
-                />
-                <!--This is where images need to match with description  -->
+                />-->
+                <!--This is where images need to match with description  
                 <div class="item-info">
                   <p>Leather Jacket Women</p>
                   <span class="cart-price">$39.99</span>
                   <br />
-                  <!-- Using br to go to the next line  -->
-
+                  Using br to go to the next line  -->
+<!--
                   <button class="btn btn-rm" type="button">Remove</button>
                 </div>
               </div>
@@ -185,10 +217,10 @@
             <td>$39.99</td>
           </tr>
         </div>
-      </table>
+      </table>-->
 
       <!--This is where we added the price  -->
-      <div class="total-price">
+      <!--<div class="total-price">
         <table>
           <tr>
             <td>Total</td>
@@ -196,7 +228,7 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div>-->
 
     <!------footer------>
     <div class="footer">

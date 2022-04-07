@@ -9,47 +9,14 @@
     <link rel="stylesheet" href="../css/style.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap"
-          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <script type="text/javascript" src="../js/domain.js"></script>
     <script type="text/javascript" src="../js/getUrlParam.js"></script>
     <script src="../js/jquery-3.6.0.js"></script>
     <script src="../js/jquery.cookie.min.js"></script>
-    <script>
-        //var Id;
-        var url;
+    <script src="../js/product_details.js"></script>
 
-        function getData1() {
-            Id = UrlParm.parm("id");
-            url = BACKEND_DOMAIN + '/item/' + Id;
-        }
-
-        getData1();
-
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'json',
-
-            success: function (jqXHR) {
-
-                var parsedJson = jqXHR;
-                // alert(parsedJson.description);
-                // alert(parsedJson.name);
-                $("#test").html("<img src='" + jqXHR.thumbnail + "'/>");
-                $("#current").html("<h4>" + jqXHR.price + "$" + "</h4>");
-                $("#name").html("<h1>" + jqXHR.name + "</h1>");
-                $("#brand").html("<h1>" + jqXHR.brand + "</h1>");
-            }
-            ,
-            error: function (jqXHR) {
-                alert(jqXHR.statusText);
-            }
-        }).done(function () {
-            console.log(arguments);
-        });
-    </script>
 
 </head>
 <body>
@@ -74,26 +41,19 @@
 </div>
 <!-- single product details  -->
 <div class="small-container single-product">
-    <div class="row">
+    <div class="row" id="product">
         <!-- we will have 2 columns  -->
         <div class="col-2" id="test">
 
         </div>
-        <div class="col-2">
+        <div class="col-2" id="Products">
             <p id="name">Home / Jacket</p>
             <h1 id="brand"></h1>
             <h1 id="current"></h1>
 
-            <select>
-                <option>Select Size</option>
-                <option>XXL</option>
-                <option>XL</option>
-                <option>L</option>
-                <option>M</option>
-                <option>S</option>
-            </select>
-            <input type="number" value="1"/>
-            <a href="cart.html" class="btn">Add To Cart</a>
+           
+            <input type="number" id="quantity" value="1"/>
+            <button class="btn" id="cart-btn">Add To Cart</button>
             <h3>Product Details<i class="fa fa-indent"></i></h3>
             <br/>
             <!--<p>
@@ -112,65 +72,6 @@
     </div>
 </div>
 
-<!-- products  -->
-<!--
-    <div class="small-container">
-      <div class="row">
-        <div class="col-4">
-          <img src="images/pexels-godisable-jacob-818992.jpg" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-
-          <p>$20.00</p>
-        </div>
-        <div class="col-4">
-          <img src="images/pexels-cottonbro-6764726.jpg" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-stroke"></i>
-          </div>
-
-          <p>$20.00</p>
-        </div>
-        <div class="col-4">
-          <img src="images/pexels-los-muertos-crew-7948441.jpg" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-
-          <p>$20.00</p>
-        </div>
-        <div class="col-4">
-          <img src="images/pexels-marlene-leppänen-1183266.jpg" />
-          <h4>Red Printed T-shirt</h4>
-          <div class="rating">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-stroke"></i>
-          </div>
-
-          <p>$20.00</p>
-        </div>
-      </div>
-    </div>
--->
 <!------footer------>
 <div class="footer">
     <div class="small-container">

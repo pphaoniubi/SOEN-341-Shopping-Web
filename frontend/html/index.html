@@ -20,15 +20,18 @@
         $(function() {
             $('.login-logout-popup').hide(200);
             $('#user-image').on('click', function() {
-            $('.login-logout-popup').toggle();
-})
-            $.ajax({
-                type: "GET",
+            $('.login-logout-popup').toggle();})
+            $.ajax(BACKEND_DOMAIN + '/item?page=0&size=20&sort=price,desc', {
+                method: "GET",
+                xhrFields: {
+                    withCredentials: true
+                },
                 crossDomain: true,
                 dataType: "json",
-                url: BACKEND_DOMAIN + '/item?page=0&size=20&sort=price,desc',
                 success: function (data) {
                     var content = data.content;
+                    //alert("Item: " + JSON.stringify(content));
+                    //console.log(content);
                     var row;
                     for (var j = 0; j < content.length; j++) {
                         if (j % 8 == 0) {
@@ -39,16 +42,16 @@
                             + "<h4>" + content[j].name + "</h4>"
                             + "<h4>" + content[j].brand + "</h4>"
                             + "<p>" + content[j].price + "$" + "</p>"
-                            + "<a onclick='checkDetail(" + content[j].id + ")'>check detail</a>&nbsp;"
-                            + "<a onclick='addToCart(" + content[j].id + ")'>add to cart</a></div>"
+                            + "<btn onclick='checkDetail(" + content[j].id + ")'>check detail</btn>&nbsp;"
+                            + "<a href='javascript: addToCart(" + content[j].id + ")' className='btn'>Add To Cart</a></div>"
                         );
                     }
                 },
                 error: function (jqXHR) {
-                    // alert(jqXHR.statusText);
+                     alert(jqXHR.statusText);
                 }
             }).done(function () {
-                console.log(arguments);
+                //console.log(arguments);
             });
         });
 
@@ -57,7 +60,30 @@
         }
 
         function addToCart(id) {
-
+            let ac = sessionStorage.getItem("ac");
+            var payload = [{
+                "itemId": id,
+                "quantity": 1
+            }];
+            if (ac != undefined && ac.length > 0) {
+                $.ajax(BACKEND_DOMAIN + "/customer/shoppingCart", {
+                    method: 'POST',
+                    data: JSON.stringify(payload),
+                    crossDomain: true,
+                    xhrFields: {withCredentials: true},
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        alert("Item is added into shopping cart! " + JSON.stringify(data));
+                        window.location.replace("index.html");
+                    },
+                    error: function (errMsg) {
+                        alert('error');
+                    }
+                });
+            } else {
+                window.location.href = "login.html";
+            }
         }
     </script>
 </head>
@@ -128,7 +154,7 @@
             <option>Default Sorting</option>
             <option>sort by price</option>
             <option>sort by popularity</option>
-            <option>sort by ating</option>
+            <option>sort by rating</option>
             <option>sort by sale</option>
         </select>
     </div>
