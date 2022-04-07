@@ -57,7 +57,7 @@
               );
             }
             row.append( "<h4>" + "total amount: " + data.shoppingCartDto.totalAmount + "$" + "</h4>");
-            "<a href='javascript: checkOut(" + data.shoppingCartDto.totalAmount + ")' className='btn'>remove</a></div>"
+            row.append("<a href='javascript: checkOut(" + data.shoppingCartDto.totalAmount + ")' className='btn'>remove</a></div>");
           },
           error: function (jqXHR) {
              alert(jqXHR.statusText);
