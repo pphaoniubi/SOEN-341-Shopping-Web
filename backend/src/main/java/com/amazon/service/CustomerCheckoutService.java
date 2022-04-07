@@ -33,7 +33,8 @@ public class CustomerCheckoutService {
         if (CollectionUtils.isEmpty(shoppingItems)) {
             throw new IllegalArgumentException("There's no items in the shopping cart.");
         }
-        Integer orderHistoryId = shoppingItems.stream().findAny().get().getOrderHistoryId();
+        Integer orderHistoryId = shoppingItems.stream().filter(shoppingItem -> Objects.nonNull(shoppingItem.getOrderHistoryId()))
+                .map(ShoppingItem::getOrderHistoryId).findAny().orElse(null);
         return findOrderHistoryByAccountAndId(account, orderHistoryId);
     }
 
@@ -41,7 +42,7 @@ public class CustomerCheckoutService {
         return findOrderHistoryByAccountAndId(account, orderHistoryId);
     }
 
-    private OrderHistory findOrderHistoryByAccountAndId(Account account, int orderHistoryId) {
+    public OrderHistory findOrderHistoryByAccountAndId(Account account, Integer orderHistoryId) {
         if (Objects.nonNull(orderHistoryId)) {
             return orderHistoryRepository.findByAccountAndId(account, orderHistoryId);
         }

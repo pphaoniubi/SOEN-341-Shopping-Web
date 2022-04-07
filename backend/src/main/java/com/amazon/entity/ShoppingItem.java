@@ -38,11 +38,12 @@ public class ShoppingItem {
 
     public ShoppingItem() {}
 
-    public ShoppingItem(Item item, int quantity, double price, ShoppingCart shoppingCart) {
+    public ShoppingItem(Item item, int quantity, double price, ShoppingCart shoppingCart, Integer orderHistoryId) {
         this.item = item;
         this.quantity = quantity;
         this.price = price;
         this.shoppingCart = shoppingCart;
+        this.orderHistoryId = orderHistoryId;
     }
 
     public int getId() {

@@ -2,6 +2,8 @@ package com.amazon.dto;
 
 import com.amazon.constant.OrderHistoryStatus;
 
+import java.util.List;
+
 public class OrderHistoryDto {
 
     private int id;
@@ -10,6 +12,7 @@ public class OrderHistoryDto {
     private PaymentDto payment;
     private AddressDto address;
     private OrderHistoryStatus status;
+    private List<ShoppingItemDto> shoppingItemDtos;
 
     public int getId() {
         return id;
@@ -57,5 +60,13 @@ public class OrderHistoryDto {
 
     public void setStatus(OrderHistoryStatus status) {
         this.status = status;
+    }
+
+    public List<ShoppingItemDto> getShoppingItemDtos() {
+        return shoppingItemDtos;
+    }
+
+    public void setShoppingItemDtos(List<ShoppingItemDto> shoppingItemDtos) {
+        this.shoppingItemDtos = shoppingItemDtos;
     }
 }

@@ -3,12 +3,14 @@ package com.amazon.service;
 import com.amazon.dto.ShoppingDto;
 import com.amazon.entity.Account;
 import com.amazon.entity.Item;
+import com.amazon.entity.OrderHistory;
 import com.amazon.entity.ShoppingCart;
 import com.amazon.entity.ShoppingItem;
 import com.amazon.mapper.ShoppingCartMapper;
 import com.amazon.mapper.ShoppingItemMapper;
 import com.amazon.repository.CustomerShoppingCartRepository;
 import com.amazon.repository.CustomerShoppingItemRepository;
+import com.amazon.repository.OrderHistoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -23,11 +25,14 @@ public class CustomerShoppingService {
 
     private final CustomerShoppingCartRepository customerShoppingCartRepository;
     private final CustomerShoppingItemRepository customerShoppingItemRepository;
+    private final OrderHistoryRepository orderHistoryRepository;
 
     public CustomerShoppingService(CustomerShoppingCartRepository customerShoppingCartRepository,
-                                   CustomerShoppingItemRepository customerShoppingItemRepository) {
+                                   CustomerShoppingItemRepository customerShoppingItemRepository,
+                                   OrderHistoryRepository orderHistoryRepository) {
         this.customerShoppingCartRepository = customerShoppingCartRepository;
         this.customerShoppingItemRepository = customerShoppingItemRepository;
+        this.orderHistoryRepository = orderHistoryRepository;
     }
 
     public ShoppingCart findCustomerShoppingCart(int accountId, int shoppingCartId) {
@@ -60,6 +65,10 @@ public class CustomerShoppingService {
 
     public List<ShoppingItem> findAllShoppingItemsByShoppingCartId(int shoppingCartId) {
         return customerShoppingItemRepository.findAllByShoppingCart_Id(shoppingCartId);
+    }
+
+    public List<ShoppingItem> findAllShoppingItemsByOrderHistoryId(int orderHistoryId) {
+        return customerShoppingItemRepository.findAllByOrderHistoryId(orderHistoryId);
     }
 
     public ShoppingDto removeShoppingItems(ShoppingCart shoppingCart, Collection<ShoppingItem> shoppingItems) {
@@ -98,12 +107,20 @@ public class CustomerShoppingService {
             shoppingItems = itemIdQuantityMap.entrySet().stream()
                     .filter(entry -> Objects.nonNull(itemMap.get(entry.getKey())))
                     .map(entry -> new ShoppingItem(itemMap.get(entry.getKey()), entry.getValue(),
-                            itemMap.get(entry.getKey()).getPrice(), newShoppingCart)).collect(Collectors.toList());
+                            itemMap.get(entry.getKey()).getPrice(), newShoppingCart, null)).collect(Collectors.toList());
             customerShoppingItemRepository.saveAll(shoppingItems);
         } else {
+            shoppingItems = findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
+            Integer orderHistoryId = shoppingItems.stream().filter(shoppingItem
+                    -> Objects.nonNull(shoppingItem.getOrderHistoryId()))
+                    .map(ShoppingItem::getOrderHistoryId).findAny().orElse(null);
+            if (Objects.nonNull(orderHistoryId)) {
+                OrderHistory orderHistory = orderHistoryRepository.findById(orderHistoryId).get();
+                orderHistory.setTotalAmount(shoppingCart.getTotalAmount() + totalAmount);
+                orderHistoryRepository.save(orderHistory);
+            }
             shoppingCart.setTotalAmount(shoppingCart.getTotalAmount() + totalAmount);
             saveShoppingCart(shoppingCart);
-            shoppingItems = findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
             Map<Integer, ShoppingItem> shoppingItemMap = shoppingItems.stream()
                     .collect(Collectors.toMap(shoppingItem -> shoppingItem.getItem().getId(), shoppingItem -> shoppingItem));
             List<Integer> shoppingItemIds = shoppingItems.stream().map(shoppingItem -> shoppingItem.getItem().getId()).collect(Collectors.toList());
@@ -112,7 +129,8 @@ public class CustomerShoppingService {
                     ShoppingItem shoppingItem = shoppingItemMap.get(item.getId());
                     shoppingItem.setQuantity(shoppingItem.getQuantity() + itemIdQuantityMap.get(shoppingItem.getItem().getId()));
                 } else {
-                    ShoppingItem shoppingItem = new ShoppingItem(item, itemIdQuantityMap.get(item.getId()), item.getPrice(), shoppingCart);
+                    ShoppingItem shoppingItem = new ShoppingItem(item, itemIdQuantityMap.get(item.getId()),
+                            item.getPrice(), shoppingCart, orderHistoryId);
                     shoppingItems.add(shoppingItem);
                 }
             }

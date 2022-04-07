@@ -9,6 +9,7 @@ import com.amazon.entity.Payment;
 import com.amazon.entity.ShoppingCart;
 import com.amazon.entity.ShoppingItem;
 import com.amazon.mapper.OrderHistoryMapper;
+import com.amazon.mapper.ShoppingItemMapper;
 import com.amazon.service.AccountService;
 import com.amazon.service.AddressService;
 import com.amazon.service.CustomerCheckoutService;
@@ -56,20 +57,29 @@ public class CustomerCheckoutController {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
         ShoppingCart shoppingCart = customerShoppingService.findCustomerShoppingCart(account.getId(), shoppingCartId);
-        OrderHistory orderHistory = new OrderHistory(account, shoppingCart.getTotalAmount(), null, null, OrderHistoryStatus.IN_PROCESS);
-        final OrderHistory orderHistoryFinal = customerCheckoutService.saveOrderHistory(orderHistory);
+        OrderHistory orderHistory;
+        try {
+            orderHistory = customerCheckoutService.getOrderHistoryByShoppingCartId(account, shoppingCart.getId());
+            return OrderHistoryMapper.INSTANCE.map(orderHistory);
+        } catch(IllegalArgumentException e) {
+
+        }
+        orderHistory = new OrderHistory(account, shoppingCart.getTotalAmount(), null, null, OrderHistoryStatus.IN_PROCESS);
         List<ShoppingItem> shoppingItems = customerShoppingService.findAllShoppingItemsByShoppingCartId(shoppingCart.getId());
+        final OrderHistory orderHistoryFinal = customerCheckoutService.saveOrderHistory(orderHistory);
         shoppingItems.forEach(shoppingItem -> shoppingItem.setOrderHistoryId(orderHistoryFinal.getId()));
         customerShoppingService.saveShoppingItems(shoppingItems);
         return OrderHistoryMapper.INSTANCE.map(orderHistory);
     }
 
-    @GetMapping("/{shoppingCartId}")
+    @GetMapping("/{orderHistoryId}")
     @Transactional(readOnly = true)
-    public OrderHistoryDto getOrderHistory(@PathVariable int shoppingCartId) {
+    public OrderHistoryDto getOrderHistory(@PathVariable Integer orderHistoryId) {
         int accountId = Util.getCurrentUser().getAccountId();
         Account account = accountService.findById(accountId);
-        return OrderHistoryMapper.INSTANCE.map(customerCheckoutService.getOrderHistoryByShoppingCartId(account, shoppingCartId));
+        OrderHistoryDto dto = OrderHistoryMapper.INSTANCE.map(customerCheckoutService.findOrderHistoryByAccountAndId(account, orderHistoryId));
+        dto.setShoppingItemDtos(ShoppingItemMapper.INSTANCE.map(customerShoppingService.findAllShoppingItemsByOrderHistoryId(orderHistoryId)));
+        return dto;
     }
 
     @PutMapping("/{orderHistoryId}/payment/{paymentId}")
