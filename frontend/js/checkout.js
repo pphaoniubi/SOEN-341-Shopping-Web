@@ -9,9 +9,17 @@ $(window).on('load', function() {
             value = amount;
         }
         getData1();
+        $("price").html(value)
     
 
     }else{
-            login();
+        login();
+        var value;
+        function getData1() {
+            amount = UrlParm.parm("amount");
+            value = amount;
+        }
+        getData1();
+        $("price").html(value)
     }
 })

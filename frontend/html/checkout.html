@@ -240,7 +240,7 @@
                                 <h5>Total</h5>
                             </div>
                             <div class="row" id="price">
-                                <h1 id="price"></h1>
+                                <h1 id="price">$</h1>
                             </div>
                             <span class="">+ Delivery Fee</span>
                         </li>
@@ -272,7 +272,7 @@
                     $("#price").html("<h4>" + data.price + "$" + "</h4>");
                 },
                 error: function (data) {
-                    // alert(data.statusText);
+                    alert(data.statusText);
                 }
     }).done(function () {
         console.log(arguments);
