@@ -14,12 +14,4 @@ $(window).on('load', function() {
 
     }else{
         login();
-        var value;
-        function getData1() {
-            amount = UrlParm.parm("amount");
-            value = amount;
-        }
-        getData1();
-        $("price").html(value)
-    }
 })
