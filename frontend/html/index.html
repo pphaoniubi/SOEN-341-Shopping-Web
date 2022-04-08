@@ -119,15 +119,22 @@
              onclick="menutoggle()">
     </div>
 
-    <div class="SearchBar">
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <form class="example" action="action_page.php" method="POST">
-            <input type="text" placeholder="Search.." name="search">
-            <button id="searchButton"><i class="fa fa-search"></i></button>
+    <div class="SearchBarByName">
+        <div>Search By Name:</div>
+        <form action = "https://33ba-38-121-86-131.ngrok.io/item/byName" method ="GET">
+            <input id="searchTextBox" type="text" placeholder="Search.." name="brand">     <!--hard coded!!!-->
+            <input id="searchButton" type="submit" value="search"/>
         </form>
-        <input type="checkbox" id="SearchOneByID" name="SearchOneByID" value="ID">
-        <label for="SearchOneByID"> Search Item By ID</label><br>
+        
+    </div>
+    
+    <div class="SearchBar">
+        <div>Search By Brand:</div>
+        <form action = "https://33ba-38-121-86-131.ngrok.io/item/byBrand" method ="GET">
+            <input id="searchTextBox" type="text" placeholder="Search.." name="brand">     <!--hard coded!!!-->
+            <input id="searchButton" type="submit" value="search"/>
+        </form>
+           
     </div>
 
 
@@ -240,3 +247,5 @@
     }
 </script>
 </html>
+
+
