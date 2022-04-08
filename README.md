@@ -26,7 +26,7 @@ The project objective is to develop a shopping website to simulate some basic fu
  * Amantuer Dinala (40027410) Dinka211 -- frontend
  * Shuang Luo (40001454) ShuangLuoZZZ -- frontend
  * Pai Peng (40155601) pphaoniubi -- backend
- * Mengqi Liu (40221432) paullmq8  -- backend
+ * Mengqi Liu (40221432) paullmq8  -- backend, frontend
 
 ## Languages:
  * Java 8
@@ -40,6 +40,7 @@ The project objective is to develop a shopping website to simulate some basic fu
  * Spring Boot
  * Spring Data JPA
  * Spring Security
+ * Spring Session
  * MapStruct
  * Slf4j
  * JUnit5
