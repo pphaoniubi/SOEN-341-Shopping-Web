@@ -11,6 +11,8 @@
     <script src="../js/jquery.cookie.min.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/checkout.js"></script>
+    <script type="text/javascript" src="../js/getUrlParam.js"></script>
+    <script src="../js/jquery-3.6.0.js"></script>
 </head>
 <body class="bg-light">
 <nav class="navbar">
@@ -237,10 +239,10 @@
 
                         <li class="payment">
                             <div>
-                                <h5>Total</h5>
+                                <h5>Total price</h5>
                             </div>
                             <div class="row" id="price">
-                                <h1 id="price">$</h1>
+                                <h1 id="price"></h1>
                             </div>
                             <span class="">+ Delivery Fee</span>
                         </li>
@@ -259,8 +261,6 @@
 
 </body>
 </html>
-<script type="text/javascript" src="../js/getUrlParam.js"></script>
-<script src="../js/jquery-3.6.0.js"></script>
 <script>
     $.ajax({
         type: "GET",
