@@ -11,8 +11,7 @@
     <script src="../js/jquery.cookie.min.js"></script>
     <script src="../js/index.js"></script>
     <script src="../js/checkout.js"></script>
-    <script type="text/javascript" src="../js/getUrlParam.js"></script>
-    <script src="../js/jquery-3.6.0.js"></script>
+
 </head>
 <body class="bg-light">
 <nav class="navbar">
@@ -239,10 +238,12 @@
 
                         <li class="payment">
                             <div>
-                                <h5>Total price</h5>
+
+
+                                <h5>Total</h5>
                             </div>
                             <div class="row" id="price">
-                                <h1 id="price"></h1>
+
                             </div>
                             <span class="">+ Delivery Fee</span>
                         </li>
@@ -261,6 +262,11 @@
 
 </body>
 </html>
+
+
+<script type="text/javascript" src="../js/getUrlParam.js"></script>
+<script src="../js/jquery-3.6.0.js"></script>
+
 <script>
     $.ajax({
         type: "GET",
@@ -269,10 +275,20 @@
                 url: BACKEND_DOMAIN + '/customer/payment',
                 success: function (data) {
                     var content = data.content;
-                    $("#price").html("<h4>" + data.price + "$" + "</h4>");
+
+
+                    var row;
+                    for (var j = 0; j < content.length; j++) {
+                            row = $("<div class='col-4'><div class='row-4'></div></div>");
+                            $("#price").append(row);
+                        row.append("<div><h4>" + content[j].price + "</h4></div>"
+
+                        );
+                    }
                 },
                 error: function (data) {
-                    alert(data.statusText);
+                    // alert(data.statusText);
+
                 }
     }).done(function () {
         console.log(arguments);
