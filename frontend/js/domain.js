@@ -1,0 +1,1 @@
+const BACKEND_DOMAIN = "https://1034-38-121-86-131.ngrok.io";
